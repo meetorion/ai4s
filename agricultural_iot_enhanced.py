@@ -854,125 +854,180 @@ def render_digital_park():
     """渲染数字园区页面"""
     st.markdown('<h2>🗺️ 数字园区</h2>', unsafe_allow_html=True)
     
+    # 地图选项
+    col1, col2 = st.columns([3, 1])
+    
+    with col2:
+        map_style = st.selectbox(
+            "地图样式",
+            ["标准地图", "简化地图"],
+            index=0
+        )
+    
     # 创建地图
     center_lat = data_loader.base_location["lat"]
     center_lng = data_loader.base_location["lng"]
     
-    m = folium.Map(
-        location=[center_lat, center_lng],
-        zoom_start=16,  # 更高放大级别显示详细信息
-        tiles='OpenStreetMap'
-    )
-    
-    # 添加卫星图层
-    folium.TileLayer(
-        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-        attr='Esri',
-        name='卫星地图',
-        overlay=False,
-        control=True
-    ).add_to(m)
-    
-    # 添加设备标记
-    device_colors = {
-        "气象站": "blue",
-        "土壤墒情": "green",
-        "水质监测": "lightblue",
-        "视频监控": "red",
-        "配电柜": "orange",
-        "虫情监测": "purple",
-        "孢子仪": "pink",
-        "环境监测": "gray",
-        "智能灌溉": "lightgreen",
-        "杀虫灯": "yellow",
-        "一体化闸门": "darkblue",
-        "积水传感器": "cadetblue",
-        "植物生长记录仪": "darkgreen"
-    }
-    
-    for device in data_loader.devices:
-        lat = device["location"]["lat"]
-        lng = device["location"]["lng"]
-        color = device_colors.get(device["device_type"], "gray")
+    if map_style == "简化地图":
+        # 简化版地图 - 更稳定
+        m = folium.Map(
+            location=[center_lat, center_lng],
+            zoom_start=15,
+            tiles='OpenStreetMap'
+        )
         
-        # 获取实时数据
-        current_data = data_loader.get_real_time_data(device["device_id"])
-        popup_content = f"""
-        <b>{device['icon']} {device['device_name']}</b><br>
-        <b>设备ID:</b> {device['device_id']}<br>
-        <b>状态:</b> {'🟢' if device['status'] == '在线' else '🔴'} {device['status']}<br>
-        <b>安装日期:</b> {device['install_date']}<br>
-        """
-        
-        if current_data:
-            popup_content += "<br><b>实时数据:</b><br>"
-            count = 0
-            for param, value in current_data.items():
-                if param != "timestamp" and count < 3:  # 只显示前3个参数
-                    param_config = device["parameters"].get(param, {})
-                    name = param_config.get("name", param)
-                    unit = param_config.get("unit", "")
-                    popup_content += f"{name}: {value} {unit}<br>"
-                    count += 1
-        
+        # 只添加研究院标记
         folium.Marker(
-            [lat, lng],
-            popup=folium.Popup(popup_content, max_width=300),
-            tooltip=f"{device['icon']} {device['device_name']}",
-            icon=folium.Icon(color=color, icon='info-sign')
+            [center_lat, center_lng],
+            popup="🏛️ 国科大深圳先进技术研究院<br>农业IoT示范园区",
+            tooltip="国科大深圳先进技术研究院",
+            icon=folium.Icon(color='red', icon='star')
+        ).add_to(m)
+        
+        # 添加园区边界
+        folium.Circle(
+            location=[center_lat, center_lng],
+            radius=1000,
+            popup="农业IoT示范园区",
+            color='green',
+            fillColor='lightgreen',
+            fillOpacity=0.2
+        ).add_to(m)
+        
+    else:
+        # 完整版地图
+        m = folium.Map(
+            location=[center_lat, center_lng],
+            zoom_start=16,  # 更高放大级别显示详细信息
+            tiles='OpenStreetMap'
+        )
+    
+        # 添加高德地图图层 (更稳定)
+        folium.TileLayer(
+            tiles='http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}',
+            attr='高德地图',
+            name='高德地图',
+            overlay=False,
+            control=True
         ).add_to(m)
     
-    # 添加研究院中心标记
-    folium.Marker(
-        [center_lat, center_lng],
-        popup=folium.Popup("""
-        <div style="width:200px;">
-        <h4>🏛️ 国科大深圳先进技术研究院</h4>
-        <p><b>地址:</b> 深圳市南山区西丽深圳大学城学苑大道1068号</p>
-        <p><b>农业IoT示范园区</b></p>
-        <p><b>设备总数:</b> 42台</p>
-        </div>
-        """, max_width=250),
-        tooltip="国科大深圳先进技术研究院",
-        icon=folium.Icon(color='red', icon='university', prefix='fa')
-    ).add_to(m)
+        # 添加设备标记 - 使用Folium支持的颜色
+        device_colors = {
+            "气象站": "blue",
+            "土壤墒情": "green", 
+            "水质监测": "lightblue",
+            "视频监控": "red",
+            "配电柜": "orange",
+            "虫情监测": "purple",
+            "孢子仪": "pink",
+            "环境监测": "gray",
+            "智能灌溉": "lightgreen",
+            "杀虫灯": "beige",  # 修改为支持的颜色
+            "一体化闸门": "darkblue",
+            "积水传感器": "cadetblue",
+            "植物生长记录仪": "darkgreen"
+        }
     
-    # 添加研究院边界 (约1km半径)
-    folium.Circle(
-        location=[center_lat, center_lng],
-        radius=1000,  # 1km半径，适合研究院规模
-        popup="农业IoT示范园区",
-        color='darkgreen',
-        fillColor='lightgreen',
-        fillOpacity=0.15,
-        weight=2,
-        dashArray='5, 5'
-    ).add_to(m)
-    
-    # 添加图例
-    legend_html = '''
-    <div style="position: fixed; 
-                top: 10px; right: 10px; width: 200px; height: auto; 
-                background-color: white; border:2px solid grey; z-index:9999; 
-                font-size:12px; padding: 10px;">
-    <h4>设备类型图例</h4>
-    '''
-    
-    for device_type, color in device_colors.items():
-        count = len([d for d in data_loader.devices if d["device_type"] == device_type])
-        icon_map = {device["device_type"]: device["icon"] for device in data_loader.devices}
-        icon = icon_map.get(device_type, "📍")
-        legend_html += f'<p><span style="color:{color};">●</span> {icon} {device_type} ({count})</p>'
-    
-    legend_html += '</div>'
-    m.get_root().html.add_child(folium.Element(legend_html))
-    
-    # 添加图层控制器
-    folium.LayerControl().add_to(m)
+        for device in data_loader.devices:
+            lat = device["location"]["lat"]
+            lng = device["location"]["lng"]
+            color = device_colors.get(device["device_type"], "gray")
+            
+            # 获取实时数据
+            current_data = data_loader.get_real_time_data(device["device_id"])
+            popup_content = f"""
+            <b>{device['icon']} {device['device_name']}</b><br>
+            <b>设备ID:</b> {device['device_id']}<br>
+            <b>状态:</b> {'🟢' if device['status'] == '在线' else '🔴'} {device['status']}<br>
+            <b>安装日期:</b> {device['install_date']}<br>
+            """
+            
+            if current_data:
+                popup_content += "<br><b>实时数据:</b><br>"
+                count = 0
+                for param, value in current_data.items():
+                    if param != "timestamp" and count < 3:  # 只显示前3个参数
+                        param_config = device["parameters"].get(param, {})
+                        name = param_config.get("name", param)
+                        unit = param_config.get("unit", "")
+                        popup_content += f"{name}: {value} {unit}<br>"
+                        count += 1
+            
+            folium.Marker(
+                [lat, lng],
+                popup=folium.Popup(popup_content, max_width=300),
+                tooltip=f"{device['icon']} {device['device_name']}",
+                icon=folium.Icon(color=color, icon='info-sign')
+            ).add_to(m)
+        
+        # 添加研究院中心标记
+        folium.Marker(
+            [center_lat, center_lng],
+            popup=folium.Popup("""
+            <div style="width:250px;">
+            <h4>🏛️ 国科大深圳先进技术研究院</h4>
+            <p><b>地址:</b> 深圳市南山区西丽深圳大学城学苑大道1068号</p>
+            <p><b>农业IoT示范园区</b></p>
+            <p><b>设备总数:</b> 42台</p>
+            <p><b>坐标:</b> 22.59163°N, 113.972654°E</p>
+            </div>
+            """, max_width=300),
+            tooltip="国科大深圳先进技术研究院",
+            icon=folium.Icon(color='red', icon='star')
+        ).add_to(m)
+        
+        # 添加研究院边界 (约1km半径)
+        folium.Circle(
+            location=[center_lat, center_lng],
+            radius=1000,  # 1km半径，适合研究院规模
+            popup="农业IoT示范园区",
+            color='darkgreen',
+            fillColor='lightgreen',
+            fillOpacity=0.15,
+            weight=2,
+            dashArray='5, 5'
+        ).add_to(m)
+        
+        # 添加图例
+        legend_html = '''
+        <div style="position: fixed; 
+                    top: 10px; right: 10px; width: 200px; height: auto; 
+                    background-color: white; border:2px solid grey; z-index:9999; 
+                    font-size:12px; padding: 10px;">
+        <h4>设备类型图例</h4>
+        '''
+        
+        for device_type, color in device_colors.items():
+            count = len([d for d in data_loader.devices if d["device_type"] == device_type])
+            icon_map = {device["device_type"]: device["icon"] for device in data_loader.devices}
+            icon = icon_map.get(device_type, "📍")
+            legend_html += f'<p><span style="color:{color};">●</span> {icon} {device_type} ({count})</p>'
+        
+        legend_html += '</div>'
+        m.get_root().html.add_child(folium.Element(legend_html))
+        
+        # 添加图层控制器
+        folium.LayerControl().add_to(m)
     
     # 显示地图
     st.markdown('<div class="map-container">', unsafe_allow_html=True)
-    map_data = st_folium(m, width=700, height=500)
+    try:
+        map_data = st_folium(m, width=700, height=500, returned_objects=["last_object_clicked"])
+    except Exception as e:
+        st.error(f"地图加载失败: {str(e)}")
+        st.info("请刷新页面重试，或检查网络连接")
+        # 创建简化版地图作为备选
+        simple_map = folium.Map(
+            location=[center_lat, center_lng],
+            zoom_start=14,
+            tiles='OpenStreetMap'
+        )
+        folium.Marker(
+            [center_lat, center_lng],
+            popup="国科大深圳先进技术研究院",
+            tooltip="研究院位置"
+        ).add_to(simple_map)
+        map_data = st_folium(simple_map, width=700, height=500)
     st.markdown('</div>', unsafe_allow_html=True)
     
     # 设备统计

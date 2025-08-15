@@ -357,6 +357,169 @@ def render_realtime_data():
             
             st.markdown("---")
 
+def render_digital_park():
+    """数字园区页面 - Streamlit Cloud优化版"""
+    st.markdown('<h2>🗺️ 数字园区</h2>', unsafe_allow_html=True)
+    
+    # 简化版地图展示 - 不使用folium，改用文本和图表
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        st.markdown("### 🏛️ 国科大深圳先进技术研究院")
+        st.markdown("**地址**: 深圳市南山区西丽深圳大学城学苑大道1068号")
+        st.markdown("**坐标**: 22.59163°N, 113.972654°E")
+        
+        # 创建设备分布图 - 使用散点图替代地图
+        st.markdown("### 📍 设备分布图")
+        
+        # 生成设备位置数据
+        np.random.seed(42)  # 固定随机种子
+        base_lat, base_lng = 22.59163, 113.972654
+        
+        device_locations = []
+        for device in data_loader.devices:
+            # 在研究院周围1km范围内随机分布
+            lat_offset = np.random.uniform(-0.005, 0.005)
+            lng_offset = np.random.uniform(-0.005, 0.005)
+            
+            device_locations.append({
+                "设备名称": device["device_name"],
+                "设备类型": device["device_type"],
+                "纬度": base_lat + lat_offset,
+                "经度": base_lng + lng_offset,
+                "状态": device["status"],
+                "图标": device["icon"]
+            })
+        
+        # 创建DataFrame
+        df_locations = pd.DataFrame(device_locations)
+        
+        # 使用Streamlit内置的散点图
+        try:
+            chart_data = df_locations[["纬度", "经度"]].copy()
+            chart_data["size"] = 20  # 点的大小
+            
+            st.scatter_chart(
+                chart_data,
+                x="经度",
+                y="纬度",
+                size="size",
+                height=400
+            )
+            
+            st.success("✅ 设备位置分布图已显示")
+            
+        except Exception as e:
+            st.warning(f"地图组件加载中，显示简化版本")
+            
+            # 备选：文字版设备分布
+            st.markdown("#### 🗺️ 设备区域分布")
+            
+            regions = {
+                "北区": {"devices": [], "emoji": "🌾"},
+                "南区": {"devices": [], "emoji": "🌿"}, 
+                "东区": {"devices": [], "emoji": "🌱"},
+                "西区": {"devices": [], "emoji": "🍃"},
+                "中心区": {"devices": [], "emoji": "🏛️"}
+            }
+            
+            # 随机分配设备到区域
+            for i, device in enumerate(data_loader.devices):
+                region_name = list(regions.keys())[i % len(regions)]
+                regions[region_name]["devices"].append(device)
+            
+            # 显示各区域设备
+            for region, info in regions.items():
+                if info["devices"]:
+                    st.markdown(f"**{info['emoji']} {region}** ({len(info['devices'])}台设备)")
+                    device_types = {}
+                    for device in info["devices"]:
+                        device_type = device["device_type"]
+                        device_types[device_type] = device_types.get(device_type, 0) + 1
+                    
+                    for device_type, count in device_types.items():
+                        icon = data_loader.device_types[device_type]["icon"]
+                        st.write(f"   {icon} {device_type}: {count}台")
+    
+    with col2:
+        st.markdown("### 📊 园区统计")
+        
+        # 设备状态统计
+        online_count = len([d for d in data_loader.devices if d["status"] == "在线"])
+        offline_count = len([d for d in data_loader.devices if d["status"] == "离线"])
+        
+        st.metric("设备总数", len(data_loader.devices))
+        st.metric("在线设备", online_count, delta=f"{online_count-offline_count}")
+        st.metric("离线设备", offline_count)
+        
+        # 设备类型分布
+        st.markdown("#### 🏭 设备类型分布")
+        device_type_counts = {}
+        for device in data_loader.devices:
+            device_type = device["device_type"]
+            device_type_counts[device_type] = device_type_counts.get(device_type, 0) + 1
+        
+        # 创建饼图数据
+        chart_data = pd.DataFrame([
+            {"类型": k, "数量": v, "图标": data_loader.device_types[k]["icon"]} 
+            for k, v in device_type_counts.items()
+        ])
+        
+        # 显示设备类型列表
+        for _, row in chart_data.iterrows():
+            percentage = round((row["数量"] / len(data_loader.devices)) * 100, 1)
+            st.write(f"{row['图标']} **{row['类型']}**: {row['数量']}台 ({percentage}%)")
+        
+        # 园区范围信息
+        st.markdown("#### 📏 园区信息")
+        st.write("**园区面积**: ~3.14 km²")
+        st.write("**覆盖范围**: 1km 半径")
+        st.write("**设备密度**: 13.4台/km²")
+        
+    # 设备详细列表
+    st.markdown("---")
+    st.markdown("### 📋 设备详细信息")
+    
+    # 筛选选项
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        device_types = ["全部"] + list(data_loader.device_types.keys())
+        filter_type = st.selectbox("筛选设备类型", device_types, key="park_type_filter")
+    
+    with col2:
+        status_options = ["全部", "在线", "离线"]
+        filter_status = st.selectbox("筛选设备状态", status_options, key="park_status_filter")
+    
+    # 应用筛选
+    filtered_devices = data_loader.devices.copy()
+    
+    if filter_type != "全部":
+        filtered_devices = [d for d in filtered_devices if d["device_type"] == filter_type]
+    
+    if filter_status != "全部":
+        filtered_devices = [d for d in filtered_devices if d["status"] == filter_status]
+    
+    # 创建设备表格
+    if filtered_devices:
+        device_table = []
+        for device in filtered_devices:
+            device_table.append({
+                "设备名称": f"{device['icon']} {device['device_name']}",
+                "设备ID": device["device_id"],
+                "设备类型": device["device_type"],
+                "状态": "🟢 在线" if device["status"] == "在线" else "🔴 离线",
+                "安装日期": device["install_date"],
+                "最后更新": device["last_update"]
+            })
+        
+        df_devices = pd.DataFrame(device_table)
+        st.dataframe(df_devices, use_container_width=True)
+        
+        st.info(f"📊 共找到 {len(filtered_devices)} 个设备")
+    else:
+        st.warning("没有找到符合条件的设备")
+
 def render_sim_card_management():
     """SIM卡管理页面"""
     st.markdown('<h2>📱 流量卡管理</h2>', unsafe_allow_html=True)
@@ -416,6 +579,7 @@ def main():
         "📊 主页": render_main_dashboard,
         "🏭 设备维护": render_device_maintenance,
         "📈 实时数据": render_realtime_data,
+        "🗺️ 数字园区": render_digital_park,
         "📱 流量卡查询": render_sim_card_management,
     }
     
