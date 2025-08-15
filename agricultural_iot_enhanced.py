@@ -30,6 +30,8 @@ st.set_page_config(
 class DataLoader:
     def __init__(self, data_dir="data"):
         self.data_dir = data_dir
+        # 地理位置配置 (智慧农场园区)
+        self.base_location = {"lat": 39.9042, "lng": 116.4074}  # 北京附近
         self._load_all_data()
     
     def _load_all_data(self):
@@ -948,7 +950,7 @@ def render_sim_card_management():
                 return 'background-color: #fee2e2'
             return ''
         
-        styled_df = df.style.applymap(highlight_status, subset=['状态'])
+        styled_df = df.style.map(highlight_status, subset=['状态'])
         st.dataframe(styled_df, use_container_width=True)
         
         # 流量使用分析
