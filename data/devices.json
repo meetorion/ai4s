@@ -1,0 +1,1911 @@
+[
+  {
+    "device_id": "000000001001",
+    "device_name": "🌤️ 气象站-01",
+    "device_type": "气象站",
+    "icon": "🌤️",
+    "location": {
+      "lat": 39.93626530907479,
+      "lng": 116.43519484767107
+    },
+    "status": "在线",
+    "install_date": "2025-03-29",
+    "last_update": "2025-08-15T09:56:06.525311",
+    "parameters": {
+      "temperature": {
+        "range": [
+          15,
+          35
+        ],
+        "unit": "°C",
+        "name": "温度"
+      },
+      "humidity": {
+        "range": [
+          40,
+          85
+        ],
+        "unit": "%",
+        "name": "湿度"
+      },
+      "wind_speed": {
+        "range": [
+          0,
+          8
+        ],
+        "unit": "m/s",
+        "name": "风速"
+      },
+      "pressure": {
+        "range": [
+          1000,
+          1030
+        ],
+        "unit": "hPa",
+        "name": "气压"
+      },
+      "rainfall": {
+        "range": [
+          0,
+          15
+        ],
+        "unit": "mm",
+        "name": "降雨量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001002",
+    "device_name": "🌤️ 气象站-02",
+    "device_type": "气象站",
+    "icon": "🌤️",
+    "location": {
+      "lat": 39.87817626365959,
+      "lng": 116.38495645222956
+    },
+    "status": "在线",
+    "install_date": "2025-04-16",
+    "last_update": "2025-08-15T10:01:06.525340",
+    "parameters": {
+      "temperature": {
+        "range": [
+          15,
+          35
+        ],
+        "unit": "°C",
+        "name": "温度"
+      },
+      "humidity": {
+        "range": [
+          40,
+          85
+        ],
+        "unit": "%",
+        "name": "湿度"
+      },
+      "wind_speed": {
+        "range": [
+          0,
+          8
+        ],
+        "unit": "m/s",
+        "name": "风速"
+      },
+      "pressure": {
+        "range": [
+          1000,
+          1030
+        ],
+        "unit": "hPa",
+        "name": "气压"
+      },
+      "rainfall": {
+        "range": [
+          0,
+          15
+        ],
+        "unit": "mm",
+        "name": "降雨量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001003",
+    "device_name": "🌤️ 气象站-03",
+    "device_type": "气象站",
+    "icon": "🌤️",
+    "location": {
+      "lat": 39.89869129922582,
+      "lng": 116.44358664477646
+    },
+    "status": "在线",
+    "install_date": "2025-06-07",
+    "last_update": "2025-08-15T10:04:06.525359",
+    "parameters": {
+      "temperature": {
+        "range": [
+          15,
+          35
+        ],
+        "unit": "°C",
+        "name": "温度"
+      },
+      "humidity": {
+        "range": [
+          40,
+          85
+        ],
+        "unit": "%",
+        "name": "湿度"
+      },
+      "wind_speed": {
+        "range": [
+          0,
+          8
+        ],
+        "unit": "m/s",
+        "name": "风速"
+      },
+      "pressure": {
+        "range": [
+          1000,
+          1030
+        ],
+        "unit": "hPa",
+        "name": "气压"
+      },
+      "rainfall": {
+        "range": [
+          0,
+          15
+        ],
+        "unit": "mm",
+        "name": "降雨量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001004",
+    "device_name": "🌱 土壤墒情-01",
+    "device_type": "土壤墒情",
+    "icon": "🌱",
+    "location": {
+      "lat": 39.94132845556629,
+      "lng": 116.39985249877077
+    },
+    "status": "在线",
+    "install_date": "2025-06-24",
+    "last_update": "2025-08-15T10:00:06.525378",
+    "parameters": {
+      "soil_temp": {
+        "range": [
+          12,
+          28
+        ],
+        "unit": "°C",
+        "name": "土壤温度"
+      },
+      "soil_humidity": {
+        "range": [
+          25,
+          75
+        ],
+        "unit": "%",
+        "name": "土壤湿度"
+      },
+      "soil_ph": {
+        "range": [
+          6.0,
+          8.0
+        ],
+        "unit": "pH",
+        "name": "土壤pH值"
+      },
+      "ec": {
+        "range": [
+          0.8,
+          2.5
+        ],
+        "unit": "mS/cm",
+        "name": "电导率"
+      },
+      "n_content": {
+        "range": [
+          80,
+          150
+        ],
+        "unit": "mg/kg",
+        "name": "氮含量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001005",
+    "device_name": "🌱 土壤墒情-02",
+    "device_type": "土壤墒情",
+    "icon": "🌱",
+    "location": {
+      "lat": 39.863196649754734,
+      "lng": 116.37727989174401
+    },
+    "status": "在线",
+    "install_date": "2025-05-21",
+    "last_update": "2025-08-15T10:00:06.525394",
+    "parameters": {
+      "soil_temp": {
+        "range": [
+          12,
+          28
+        ],
+        "unit": "°C",
+        "name": "土壤温度"
+      },
+      "soil_humidity": {
+        "range": [
+          25,
+          75
+        ],
+        "unit": "%",
+        "name": "土壤湿度"
+      },
+      "soil_ph": {
+        "range": [
+          6.0,
+          8.0
+        ],
+        "unit": "pH",
+        "name": "土壤pH值"
+      },
+      "ec": {
+        "range": [
+          0.8,
+          2.5
+        ],
+        "unit": "mS/cm",
+        "name": "电导率"
+      },
+      "n_content": {
+        "range": [
+          80,
+          150
+        ],
+        "unit": "mg/kg",
+        "name": "氮含量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001006",
+    "device_name": "🌱 土壤墒情-03",
+    "device_type": "土壤墒情",
+    "icon": "🌱",
+    "location": {
+      "lat": 39.92055849873386,
+      "lng": 116.406266204536
+    },
+    "status": "在线",
+    "install_date": "2024-09-27",
+    "last_update": "2025-08-15T10:12:06.525410",
+    "parameters": {
+      "soil_temp": {
+        "range": [
+          12,
+          28
+        ],
+        "unit": "°C",
+        "name": "土壤温度"
+      },
+      "soil_humidity": {
+        "range": [
+          25,
+          75
+        ],
+        "unit": "%",
+        "name": "土壤湿度"
+      },
+      "soil_ph": {
+        "range": [
+          6.0,
+          8.0
+        ],
+        "unit": "pH",
+        "name": "土壤pH值"
+      },
+      "ec": {
+        "range": [
+          0.8,
+          2.5
+        ],
+        "unit": "mS/cm",
+        "name": "电导率"
+      },
+      "n_content": {
+        "range": [
+          80,
+          150
+        ],
+        "unit": "mg/kg",
+        "name": "氮含量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001007",
+    "device_name": "🌱 土壤墒情-04",
+    "device_type": "土壤墒情",
+    "icon": "🌱",
+    "location": {
+      "lat": 39.901032305972855,
+      "lng": 116.3743324630137
+    },
+    "status": "离线",
+    "install_date": "2025-05-21",
+    "last_update": "2025-08-15T10:07:06.525425",
+    "parameters": {
+      "soil_temp": {
+        "range": [
+          12,
+          28
+        ],
+        "unit": "°C",
+        "name": "土壤温度"
+      },
+      "soil_humidity": {
+        "range": [
+          25,
+          75
+        ],
+        "unit": "%",
+        "name": "土壤湿度"
+      },
+      "soil_ph": {
+        "range": [
+          6.0,
+          8.0
+        ],
+        "unit": "pH",
+        "name": "土壤pH值"
+      },
+      "ec": {
+        "range": [
+          0.8,
+          2.5
+        ],
+        "unit": "mS/cm",
+        "name": "电导率"
+      },
+      "n_content": {
+        "range": [
+          80,
+          150
+        ],
+        "unit": "mg/kg",
+        "name": "氮含量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001008",
+    "device_name": "🌱 土壤墒情-05",
+    "device_type": "土壤墒情",
+    "icon": "🌱",
+    "location": {
+      "lat": 39.907676604822115,
+      "lng": 116.43324701525172
+    },
+    "status": "在线",
+    "install_date": "2025-01-30",
+    "last_update": "2025-08-15T09:57:06.525439",
+    "parameters": {
+      "soil_temp": {
+        "range": [
+          12,
+          28
+        ],
+        "unit": "°C",
+        "name": "土壤温度"
+      },
+      "soil_humidity": {
+        "range": [
+          25,
+          75
+        ],
+        "unit": "%",
+        "name": "土壤湿度"
+      },
+      "soil_ph": {
+        "range": [
+          6.0,
+          8.0
+        ],
+        "unit": "pH",
+        "name": "土壤pH值"
+      },
+      "ec": {
+        "range": [
+          0.8,
+          2.5
+        ],
+        "unit": "mS/cm",
+        "name": "电导率"
+      },
+      "n_content": {
+        "range": [
+          80,
+          150
+        ],
+        "unit": "mg/kg",
+        "name": "氮含量"
+      }
+    }
+  },
+  {
+    "device_id": "865989071557605",
+    "device_name": "💧 水质监测-01",
+    "device_type": "水质监测",
+    "icon": "💧",
+    "location": {
+      "lat": 39.87794077550468,
+      "lng": 116.36137720141238
+    },
+    "status": "在线",
+    "install_date": "2024-09-19",
+    "last_update": "2025-08-15T10:04:06.525455",
+    "parameters": {
+      "ph": {
+        "range": [
+          6.8,
+          7.2
+        ],
+        "unit": "pH",
+        "name": "pH值"
+      },
+      "turbidity": {
+        "range": [
+          15,
+          25
+        ],
+        "unit": "NTU",
+        "name": "浊度"
+      },
+      "dissolved_oxygen": {
+        "range": [
+          6.5,
+          8.5
+        ],
+        "unit": "mg/L",
+        "name": "溶解氧"
+      },
+      "water_temp": {
+        "range": [
+          18,
+          25
+        ],
+        "unit": "°C",
+        "name": "水温"
+      },
+      "conductivity": {
+        "range": [
+          180,
+          220
+        ],
+        "unit": "μS/cm",
+        "name": "电导率"
+      }
+    }
+  },
+  {
+    "device_id": "000000001010",
+    "device_name": "📹 视频监控-01",
+    "device_type": "视频监控",
+    "icon": "📹",
+    "location": {
+      "lat": 39.94744636856195,
+      "lng": 116.43127631374718
+    },
+    "status": "离线",
+    "install_date": "2025-05-04",
+    "last_update": "2025-08-15T09:51:06.525477",
+    "parameters": {
+      "online_status": {
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "name": "在线状态"
+      },
+      "resolution": {
+        "values": [
+          "1080P",
+          "720P",
+          "4K"
+        ],
+        "name": "分辨率"
+      },
+      "storage_usage": {
+        "range": [
+          20,
+          80
+        ],
+        "unit": "%",
+        "name": "存储使用率"
+      }
+    }
+  },
+  {
+    "device_id": "000000001011",
+    "device_name": "📹 视频监控-02",
+    "device_type": "视频监控",
+    "icon": "📹",
+    "location": {
+      "lat": 39.92406394574896,
+      "lng": 116.38921259553885
+    },
+    "status": "在线",
+    "install_date": "2024-09-08",
+    "last_update": "2025-08-15T09:47:06.525493",
+    "parameters": {
+      "online_status": {
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "name": "在线状态"
+      },
+      "resolution": {
+        "values": [
+          "1080P",
+          "720P",
+          "4K"
+        ],
+        "name": "分辨率"
+      },
+      "storage_usage": {
+        "range": [
+          20,
+          80
+        ],
+        "unit": "%",
+        "name": "存储使用率"
+      }
+    }
+  },
+  {
+    "device_id": "000000001012",
+    "device_name": "📹 视频监控-03",
+    "device_type": "视频监控",
+    "icon": "📹",
+    "location": {
+      "lat": 39.85653729888638,
+      "lng": 116.4069623946814
+    },
+    "status": "在线",
+    "install_date": "2025-04-15",
+    "last_update": "2025-08-15T09:56:06.525507",
+    "parameters": {
+      "online_status": {
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "name": "在线状态"
+      },
+      "resolution": {
+        "values": [
+          "1080P",
+          "720P",
+          "4K"
+        ],
+        "name": "分辨率"
+      },
+      "storage_usage": {
+        "range": [
+          20,
+          80
+        ],
+        "unit": "%",
+        "name": "存储使用率"
+      }
+    }
+  },
+  {
+    "device_id": "000000001013",
+    "device_name": "📹 视频监控-04",
+    "device_type": "视频监控",
+    "icon": "📹",
+    "location": {
+      "lat": 39.890282296548904,
+      "lng": 116.4030111358983
+    },
+    "status": "在线",
+    "install_date": "2025-06-22",
+    "last_update": "2025-08-15T09:51:06.525521",
+    "parameters": {
+      "online_status": {
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "name": "在线状态"
+      },
+      "resolution": {
+        "values": [
+          "1080P",
+          "720P",
+          "4K"
+        ],
+        "name": "分辨率"
+      },
+      "storage_usage": {
+        "range": [
+          20,
+          80
+        ],
+        "unit": "%",
+        "name": "存储使用率"
+      }
+    }
+  },
+  {
+    "device_id": "000000001014",
+    "device_name": "⚡ 配电柜-01",
+    "device_type": "配电柜",
+    "icon": "⚡",
+    "location": {
+      "lat": 39.9259302522266,
+      "lng": 116.41979271591568
+    },
+    "status": "离线",
+    "install_date": "2025-01-03",
+    "last_update": "2025-08-15T09:54:06.525536",
+    "parameters": {
+      "voltage": {
+        "range": [
+          220,
+          240
+        ],
+        "unit": "V",
+        "name": "电压"
+      },
+      "current": {
+        "range": [
+          8,
+          25
+        ],
+        "unit": "A",
+        "name": "电流"
+      },
+      "power": {
+        "range": [
+          1.5,
+          6.0
+        ],
+        "unit": "kW",
+        "name": "功率"
+      },
+      "frequency": {
+        "range": [
+          49.8,
+          50.2
+        ],
+        "unit": "Hz",
+        "name": "频率"
+      }
+    }
+  },
+  {
+    "device_id": "000000001015",
+    "device_name": "⚡ 配电柜-02",
+    "device_type": "配电柜",
+    "icon": "⚡",
+    "location": {
+      "lat": 39.85561577475064,
+      "lng": 116.42586211690468
+    },
+    "status": "在线",
+    "install_date": "2024-11-29",
+    "last_update": "2025-08-15T10:10:06.525555",
+    "parameters": {
+      "voltage": {
+        "range": [
+          220,
+          240
+        ],
+        "unit": "V",
+        "name": "电压"
+      },
+      "current": {
+        "range": [
+          8,
+          25
+        ],
+        "unit": "A",
+        "name": "电流"
+      },
+      "power": {
+        "range": [
+          1.5,
+          6.0
+        ],
+        "unit": "kW",
+        "name": "功率"
+      },
+      "frequency": {
+        "range": [
+          49.8,
+          50.2
+        ],
+        "unit": "Hz",
+        "name": "频率"
+      }
+    }
+  },
+  {
+    "device_id": "000000001016",
+    "device_name": "🐛 虫情监测-01",
+    "device_type": "虫情监测",
+    "icon": "🐛",
+    "location": {
+      "lat": 39.92210566854919,
+      "lng": 116.44219360096504
+    },
+    "status": "在线",
+    "install_date": "2025-03-23",
+    "last_update": "2025-08-15T10:00:06.525570",
+    "parameters": {
+      "pest_count": {
+        "range": [
+          0,
+          50
+        ],
+        "unit": "只",
+        "name": "害虫数量"
+      },
+      "trap_temp": {
+        "range": [
+          20,
+          35
+        ],
+        "unit": "°C",
+        "name": "诱捕器温度"
+      },
+      "light_intensity": {
+        "range": [
+          0,
+          100
+        ],
+        "unit": "%",
+        "name": "灯光强度"
+      }
+    }
+  },
+  {
+    "device_id": "000000001017",
+    "device_name": "🐛 虫情监测-02",
+    "device_type": "虫情监测",
+    "icon": "🐛",
+    "location": {
+      "lat": 39.94260865637515,
+      "lng": 116.41764895919161
+    },
+    "status": "在线",
+    "install_date": "2025-02-07",
+    "last_update": "2025-08-15T10:02:06.525594",
+    "parameters": {
+      "pest_count": {
+        "range": [
+          0,
+          50
+        ],
+        "unit": "只",
+        "name": "害虫数量"
+      },
+      "trap_temp": {
+        "range": [
+          20,
+          35
+        ],
+        "unit": "°C",
+        "name": "诱捕器温度"
+      },
+      "light_intensity": {
+        "range": [
+          0,
+          100
+        ],
+        "unit": "%",
+        "name": "灯光强度"
+      }
+    }
+  },
+  {
+    "device_id": "000000001018",
+    "device_name": "🐛 虫情监测-03",
+    "device_type": "虫情监测",
+    "icon": "🐛",
+    "location": {
+      "lat": 39.94710457289003,
+      "lng": 116.40277363416848
+    },
+    "status": "在线",
+    "install_date": "2025-02-19",
+    "last_update": "2025-08-15T09:49:06.525610",
+    "parameters": {
+      "pest_count": {
+        "range": [
+          0,
+          50
+        ],
+        "unit": "只",
+        "name": "害虫数量"
+      },
+      "trap_temp": {
+        "range": [
+          20,
+          35
+        ],
+        "unit": "°C",
+        "name": "诱捕器温度"
+      },
+      "light_intensity": {
+        "range": [
+          0,
+          100
+        ],
+        "unit": "%",
+        "name": "灯光强度"
+      }
+    }
+  },
+  {
+    "device_id": "000000001019",
+    "device_name": "🦠 孢子仪-01",
+    "device_type": "孢子仪",
+    "icon": "🦠",
+    "location": {
+      "lat": 39.941527147702516,
+      "lng": 116.45608069829392
+    },
+    "status": "在线",
+    "install_date": "2025-04-08",
+    "last_update": "2025-08-15T10:04:06.525625",
+    "parameters": {
+      "spore_count": {
+        "range": [
+          100,
+          2000
+        ],
+        "unit": "个/m³",
+        "name": "孢子浓度"
+      },
+      "analysis_temp": {
+        "range": [
+          25,
+          30
+        ],
+        "unit": "°C",
+        "name": "分析温度"
+      },
+      "sample_volume": {
+        "range": [
+          10,
+          100
+        ],
+        "unit": "L",
+        "name": "采样体积"
+      }
+    }
+  },
+  {
+    "device_id": "000000001020",
+    "device_name": "🦠 孢子仪-02",
+    "device_type": "孢子仪",
+    "icon": "🦠",
+    "location": {
+      "lat": 39.887962229278095,
+      "lng": 116.41336643456006
+    },
+    "status": "在线",
+    "install_date": "2025-01-17",
+    "last_update": "2025-08-15T10:02:06.525640",
+    "parameters": {
+      "spore_count": {
+        "range": [
+          100,
+          2000
+        ],
+        "unit": "个/m³",
+        "name": "孢子浓度"
+      },
+      "analysis_temp": {
+        "range": [
+          25,
+          30
+        ],
+        "unit": "°C",
+        "name": "分析温度"
+      },
+      "sample_volume": {
+        "range": [
+          10,
+          100
+        ],
+        "unit": "L",
+        "name": "采样体积"
+      }
+    }
+  },
+  {
+    "device_id": "000000001021",
+    "device_name": "🌡️ 环境监测-01",
+    "device_type": "环境监测",
+    "icon": "🌡️",
+    "location": {
+      "lat": 39.94315861430871,
+      "lng": 116.38800389407696
+    },
+    "status": "在线",
+    "install_date": "2025-05-25",
+    "last_update": "2025-08-15T10:10:06.525659",
+    "parameters": {
+      "ambient_temp": {
+        "range": [
+          18,
+          32
+        ],
+        "unit": "°C",
+        "name": "环境温度"
+      },
+      "ambient_humidity": {
+        "range": [
+          45,
+          80
+        ],
+        "unit": "%",
+        "name": "环境湿度"
+      },
+      "co2": {
+        "range": [
+          400,
+          800
+        ],
+        "unit": "ppm",
+        "name": "CO2浓度"
+      },
+      "light_intensity": {
+        "range": [
+          20000,
+          80000
+        ],
+        "unit": "lux",
+        "name": "光照强度"
+      }
+    }
+  },
+  {
+    "device_id": "000000001022",
+    "device_name": "🌡️ 环境监测-02",
+    "device_type": "环境监测",
+    "icon": "🌡️",
+    "location": {
+      "lat": 39.90182273272533,
+      "lng": 116.38011270865425
+    },
+    "status": "离线",
+    "install_date": "2025-01-22",
+    "last_update": "2025-08-15T09:55:06.525674",
+    "parameters": {
+      "ambient_temp": {
+        "range": [
+          18,
+          32
+        ],
+        "unit": "°C",
+        "name": "环境温度"
+      },
+      "ambient_humidity": {
+        "range": [
+          45,
+          80
+        ],
+        "unit": "%",
+        "name": "环境湿度"
+      },
+      "co2": {
+        "range": [
+          400,
+          800
+        ],
+        "unit": "ppm",
+        "name": "CO2浓度"
+      },
+      "light_intensity": {
+        "range": [
+          20000,
+          80000
+        ],
+        "unit": "lux",
+        "name": "光照强度"
+      }
+    }
+  },
+  {
+    "device_id": "000000001023",
+    "device_name": "🌡️ 环境监测-03",
+    "device_type": "环境监测",
+    "icon": "🌡️",
+    "location": {
+      "lat": 39.95289974378088,
+      "lng": 116.4389918419458
+    },
+    "status": "离线",
+    "install_date": "2025-01-02",
+    "last_update": "2025-08-15T09:53:06.525692",
+    "parameters": {
+      "ambient_temp": {
+        "range": [
+          18,
+          32
+        ],
+        "unit": "°C",
+        "name": "环境温度"
+      },
+      "ambient_humidity": {
+        "range": [
+          45,
+          80
+        ],
+        "unit": "%",
+        "name": "环境湿度"
+      },
+      "co2": {
+        "range": [
+          400,
+          800
+        ],
+        "unit": "ppm",
+        "name": "CO2浓度"
+      },
+      "light_intensity": {
+        "range": [
+          20000,
+          80000
+        ],
+        "unit": "lux",
+        "name": "光照强度"
+      }
+    }
+  },
+  {
+    "device_id": "000000001024",
+    "device_name": "🌡️ 环境监测-04",
+    "device_type": "环境监测",
+    "icon": "🌡️",
+    "location": {
+      "lat": 39.935054036260105,
+      "lng": 116.37370450284241
+    },
+    "status": "在线",
+    "install_date": "2025-05-19",
+    "last_update": "2025-08-15T09:46:06.525706",
+    "parameters": {
+      "ambient_temp": {
+        "range": [
+          18,
+          32
+        ],
+        "unit": "°C",
+        "name": "环境温度"
+      },
+      "ambient_humidity": {
+        "range": [
+          45,
+          80
+        ],
+        "unit": "%",
+        "name": "环境湿度"
+      },
+      "co2": {
+        "range": [
+          400,
+          800
+        ],
+        "unit": "ppm",
+        "name": "CO2浓度"
+      },
+      "light_intensity": {
+        "range": [
+          20000,
+          80000
+        ],
+        "unit": "lux",
+        "name": "光照强度"
+      }
+    }
+  },
+  {
+    "device_id": "000000001025",
+    "device_name": "💦 智能灌溉-01",
+    "device_type": "智能灌溉",
+    "icon": "💦",
+    "location": {
+      "lat": 39.93635653353494,
+      "lng": 116.41500783748138
+    },
+    "status": "在线",
+    "install_date": "2024-09-09",
+    "last_update": "2025-08-15T10:13:06.525721",
+    "parameters": {
+      "flow_rate": {
+        "range": [
+          2,
+          15
+        ],
+        "unit": "L/min",
+        "name": "流量"
+      },
+      "pressure": {
+        "range": [
+          0.2,
+          0.8
+        ],
+        "unit": "MPa",
+        "name": "水压"
+      },
+      "valve_status": {
+        "values": [
+          "开启",
+          "关闭"
+        ],
+        "name": "阀门状态"
+      },
+      "water_level": {
+        "range": [
+          30,
+          95
+        ],
+        "unit": "%",
+        "name": "水位"
+      }
+    }
+  },
+  {
+    "device_id": "000000001026",
+    "device_name": "💦 智能灌溉-02",
+    "device_type": "智能灌溉",
+    "icon": "💦",
+    "location": {
+      "lat": 39.924003049147004,
+      "lng": 116.38352771874281
+    },
+    "status": "在线",
+    "install_date": "2024-12-03",
+    "last_update": "2025-08-15T09:55:06.525736",
+    "parameters": {
+      "flow_rate": {
+        "range": [
+          2,
+          15
+        ],
+        "unit": "L/min",
+        "name": "流量"
+      },
+      "pressure": {
+        "range": [
+          0.2,
+          0.8
+        ],
+        "unit": "MPa",
+        "name": "水压"
+      },
+      "valve_status": {
+        "values": [
+          "开启",
+          "关闭"
+        ],
+        "name": "阀门状态"
+      },
+      "water_level": {
+        "range": [
+          30,
+          95
+        ],
+        "unit": "%",
+        "name": "水位"
+      }
+    }
+  },
+  {
+    "device_id": "000000001027",
+    "device_name": "💦 智能灌溉-03",
+    "device_type": "智能灌溉",
+    "icon": "💦",
+    "location": {
+      "lat": 39.95054344926356,
+      "lng": 116.44058874286146
+    },
+    "status": "在线",
+    "install_date": "2025-03-29",
+    "last_update": "2025-08-15T09:57:06.525753",
+    "parameters": {
+      "flow_rate": {
+        "range": [
+          2,
+          15
+        ],
+        "unit": "L/min",
+        "name": "流量"
+      },
+      "pressure": {
+        "range": [
+          0.2,
+          0.8
+        ],
+        "unit": "MPa",
+        "name": "水压"
+      },
+      "valve_status": {
+        "values": [
+          "开启",
+          "关闭"
+        ],
+        "name": "阀门状态"
+      },
+      "water_level": {
+        "range": [
+          30,
+          95
+        ],
+        "unit": "%",
+        "name": "水位"
+      }
+    }
+  },
+  {
+    "device_id": "000000001028",
+    "device_name": "💦 智能灌溉-04",
+    "device_type": "智能灌溉",
+    "icon": "💦",
+    "location": {
+      "lat": 39.87393680061552,
+      "lng": 116.43404538911533
+    },
+    "status": "在线",
+    "install_date": "2024-09-15",
+    "last_update": "2025-08-15T09:59:06.525786",
+    "parameters": {
+      "flow_rate": {
+        "range": [
+          2,
+          15
+        ],
+        "unit": "L/min",
+        "name": "流量"
+      },
+      "pressure": {
+        "range": [
+          0.2,
+          0.8
+        ],
+        "unit": "MPa",
+        "name": "水压"
+      },
+      "valve_status": {
+        "values": [
+          "开启",
+          "关闭"
+        ],
+        "name": "阀门状态"
+      },
+      "water_level": {
+        "range": [
+          30,
+          95
+        ],
+        "unit": "%",
+        "name": "水位"
+      }
+    }
+  },
+  {
+    "device_id": "000000001029",
+    "device_name": "💦 智能灌溉-05",
+    "device_type": "智能灌溉",
+    "icon": "💦",
+    "location": {
+      "lat": 39.85992387473838,
+      "lng": 116.39636962930231
+    },
+    "status": "在线",
+    "install_date": "2025-06-01",
+    "last_update": "2025-08-15T10:02:06.525824",
+    "parameters": {
+      "flow_rate": {
+        "range": [
+          2,
+          15
+        ],
+        "unit": "L/min",
+        "name": "流量"
+      },
+      "pressure": {
+        "range": [
+          0.2,
+          0.8
+        ],
+        "unit": "MPa",
+        "name": "水压"
+      },
+      "valve_status": {
+        "values": [
+          "开启",
+          "关闭"
+        ],
+        "name": "阀门状态"
+      },
+      "water_level": {
+        "range": [
+          30,
+          95
+        ],
+        "unit": "%",
+        "name": "水位"
+      }
+    }
+  },
+  {
+    "device_id": "000000001030",
+    "device_name": "💦 智能灌溉-06",
+    "device_type": "智能灌溉",
+    "icon": "💦",
+    "location": {
+      "lat": 39.890931486758454,
+      "lng": 116.39967984545454
+    },
+    "status": "在线",
+    "install_date": "2024-12-11",
+    "last_update": "2025-08-15T09:52:06.525848",
+    "parameters": {
+      "flow_rate": {
+        "range": [
+          2,
+          15
+        ],
+        "unit": "L/min",
+        "name": "流量"
+      },
+      "pressure": {
+        "range": [
+          0.2,
+          0.8
+        ],
+        "unit": "MPa",
+        "name": "水压"
+      },
+      "valve_status": {
+        "values": [
+          "开启",
+          "关闭"
+        ],
+        "name": "阀门状态"
+      },
+      "water_level": {
+        "range": [
+          30,
+          95
+        ],
+        "unit": "%",
+        "name": "水位"
+      }
+    }
+  },
+  {
+    "device_id": "000000001031",
+    "device_name": "💡 杀虫灯-01",
+    "device_type": "杀虫灯",
+    "icon": "💡",
+    "location": {
+      "lat": 39.94399695690982,
+      "lng": 116.41088945315109
+    },
+    "status": "在线",
+    "install_date": "2024-12-14",
+    "last_update": "2025-08-15T10:01:06.525867",
+    "parameters": {
+      "power_consumption": {
+        "range": [
+          15,
+          30
+        ],
+        "unit": "W",
+        "name": "功耗"
+      },
+      "working_hours": {
+        "range": [
+          6,
+          12
+        ],
+        "unit": "h",
+        "name": "工作时长"
+      },
+      "killed_insects": {
+        "range": [
+          50,
+          300
+        ],
+        "unit": "只",
+        "name": "灭虫数量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001032",
+    "device_name": "💡 杀虫灯-02",
+    "device_type": "杀虫灯",
+    "icon": "💡",
+    "location": {
+      "lat": 39.86592358896172,
+      "lng": 116.43541682806017
+    },
+    "status": "在线",
+    "install_date": "2025-05-20",
+    "last_update": "2025-08-15T09:53:06.525885",
+    "parameters": {
+      "power_consumption": {
+        "range": [
+          15,
+          30
+        ],
+        "unit": "W",
+        "name": "功耗"
+      },
+      "working_hours": {
+        "range": [
+          6,
+          12
+        ],
+        "unit": "h",
+        "name": "工作时长"
+      },
+      "killed_insects": {
+        "range": [
+          50,
+          300
+        ],
+        "unit": "只",
+        "name": "灭虫数量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001033",
+    "device_name": "💡 杀虫灯-03",
+    "device_type": "杀虫灯",
+    "icon": "💡",
+    "location": {
+      "lat": 39.93428103274955,
+      "lng": 116.45197874441446
+    },
+    "status": "在线",
+    "install_date": "2025-05-08",
+    "last_update": "2025-08-15T09:53:06.525900",
+    "parameters": {
+      "power_consumption": {
+        "range": [
+          15,
+          30
+        ],
+        "unit": "W",
+        "name": "功耗"
+      },
+      "working_hours": {
+        "range": [
+          6,
+          12
+        ],
+        "unit": "h",
+        "name": "工作时长"
+      },
+      "killed_insects": {
+        "range": [
+          50,
+          300
+        ],
+        "unit": "只",
+        "name": "灭虫数量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001034",
+    "device_name": "💡 杀虫灯-04",
+    "device_type": "杀虫灯",
+    "icon": "💡",
+    "location": {
+      "lat": 39.874943673582855,
+      "lng": 116.4019487347859
+    },
+    "status": "在线",
+    "install_date": "2025-01-02",
+    "last_update": "2025-08-15T10:10:06.525915",
+    "parameters": {
+      "power_consumption": {
+        "range": [
+          15,
+          30
+        ],
+        "unit": "W",
+        "name": "功耗"
+      },
+      "working_hours": {
+        "range": [
+          6,
+          12
+        ],
+        "unit": "h",
+        "name": "工作时长"
+      },
+      "killed_insects": {
+        "range": [
+          50,
+          300
+        ],
+        "unit": "只",
+        "name": "灭虫数量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001035",
+    "device_name": "🚪 一体化闸门-01",
+    "device_type": "一体化闸门",
+    "icon": "🚪",
+    "location": {
+      "lat": 39.85736319823634,
+      "lng": 116.42003981441107
+    },
+    "status": "离线",
+    "install_date": "2025-05-07",
+    "last_update": "2025-08-15T09:50:06.525929",
+    "parameters": {
+      "gate_opening": {
+        "range": [
+          0,
+          100
+        ],
+        "unit": "%",
+        "name": "闸门开度"
+      },
+      "water_flow": {
+        "range": [
+          0,
+          500
+        ],
+        "unit": "m³/h",
+        "name": "过水流量"
+      },
+      "upstream_level": {
+        "range": [
+          2.0,
+          4.5
+        ],
+        "unit": "m",
+        "name": "上游水位"
+      },
+      "downstream_level": {
+        "range": [
+          1.5,
+          4.0
+        ],
+        "unit": "m",
+        "name": "下游水位"
+      }
+    }
+  },
+  {
+    "device_id": "000000001036",
+    "device_name": "🚪 一体化闸门-02",
+    "device_type": "一体化闸门",
+    "icon": "🚪",
+    "location": {
+      "lat": 39.90293221123572,
+      "lng": 116.3791201534803
+    },
+    "status": "离线",
+    "install_date": "2025-04-19",
+    "last_update": "2025-08-15T10:00:06.525947",
+    "parameters": {
+      "gate_opening": {
+        "range": [
+          0,
+          100
+        ],
+        "unit": "%",
+        "name": "闸门开度"
+      },
+      "water_flow": {
+        "range": [
+          0,
+          500
+        ],
+        "unit": "m³/h",
+        "name": "过水流量"
+      },
+      "upstream_level": {
+        "range": [
+          2.0,
+          4.5
+        ],
+        "unit": "m",
+        "name": "上游水位"
+      },
+      "downstream_level": {
+        "range": [
+          1.5,
+          4.0
+        ],
+        "unit": "m",
+        "name": "下游水位"
+      }
+    }
+  },
+  {
+    "device_id": "000000001037",
+    "device_name": "🌊 积水传感器-01",
+    "device_type": "积水传感器",
+    "icon": "🌊",
+    "location": {
+      "lat": 39.882749876861986,
+      "lng": 116.45288275863703
+    },
+    "status": "在线",
+    "install_date": "2025-01-12",
+    "last_update": "2025-08-15T09:49:06.525962",
+    "parameters": {
+      "water_depth": {
+        "range": [
+          0,
+          80
+        ],
+        "unit": "cm",
+        "name": "积水深度"
+      },
+      "alert_level": {
+        "values": [
+          "正常",
+          "警告",
+          "危险"
+        ],
+        "name": "预警等级"
+      },
+      "drain_status": {
+        "values": [
+          "畅通",
+          "堵塞"
+        ],
+        "name": "排水状态"
+      }
+    }
+  },
+  {
+    "device_id": "000000001038",
+    "device_name": "🌊 积水传感器-02",
+    "device_type": "积水传感器",
+    "icon": "🌊",
+    "location": {
+      "lat": 39.91351315782767,
+      "lng": 116.44184443819874
+    },
+    "status": "在线",
+    "install_date": "2025-07-07",
+    "last_update": "2025-08-15T09:59:06.525976",
+    "parameters": {
+      "water_depth": {
+        "range": [
+          0,
+          80
+        ],
+        "unit": "cm",
+        "name": "积水深度"
+      },
+      "alert_level": {
+        "values": [
+          "正常",
+          "警告",
+          "危险"
+        ],
+        "name": "预警等级"
+      },
+      "drain_status": {
+        "values": [
+          "畅通",
+          "堵塞"
+        ],
+        "name": "排水状态"
+      }
+    }
+  },
+  {
+    "device_id": "000000001039",
+    "device_name": "🌊 积水传感器-03",
+    "device_type": "积水传感器",
+    "icon": "🌊",
+    "location": {
+      "lat": 39.88030616613016,
+      "lng": 116.3918542573196
+    },
+    "status": "离线",
+    "install_date": "2025-04-12",
+    "last_update": "2025-08-15T09:47:06.525990",
+    "parameters": {
+      "water_depth": {
+        "range": [
+          0,
+          80
+        ],
+        "unit": "cm",
+        "name": "积水深度"
+      },
+      "alert_level": {
+        "values": [
+          "正常",
+          "警告",
+          "危险"
+        ],
+        "name": "预警等级"
+      },
+      "drain_status": {
+        "values": [
+          "畅通",
+          "堵塞"
+        ],
+        "name": "排水状态"
+      }
+    }
+  },
+  {
+    "device_id": "000000001040",
+    "device_name": "📊 植物生长记录仪-01",
+    "device_type": "植物生长记录仪",
+    "icon": "📊",
+    "location": {
+      "lat": 39.917421138669276,
+      "lng": 116.3841176369023
+    },
+    "status": "在线",
+    "install_date": "2025-01-28",
+    "last_update": "2025-08-15T10:14:06.526005",
+    "parameters": {
+      "plant_height": {
+        "range": [
+          15,
+          120
+        ],
+        "unit": "cm",
+        "name": "植株高度"
+      },
+      "leaf_area": {
+        "range": [
+          50,
+          200
+        ],
+        "unit": "cm²",
+        "name": "叶面积"
+      },
+      "growth_rate": {
+        "range": [
+          0.5,
+          3.0
+        ],
+        "unit": "cm/day",
+        "name": "生长速率"
+      },
+      "chlorophyll": {
+        "range": [
+          30,
+          60
+        ],
+        "unit": "SPAD",
+        "name": "叶绿素含量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001041",
+    "device_name": "📊 植物生长记录仪-02",
+    "device_type": "植物生长记录仪",
+    "icon": "📊",
+    "location": {
+      "lat": 39.87084133834786,
+      "lng": 116.4190264071185
+    },
+    "status": "在线",
+    "install_date": "2025-07-11",
+    "last_update": "2025-08-15T09:55:06.526019",
+    "parameters": {
+      "plant_height": {
+        "range": [
+          15,
+          120
+        ],
+        "unit": "cm",
+        "name": "植株高度"
+      },
+      "leaf_area": {
+        "range": [
+          50,
+          200
+        ],
+        "unit": "cm²",
+        "name": "叶面积"
+      },
+      "growth_rate": {
+        "range": [
+          0.5,
+          3.0
+        ],
+        "unit": "cm/day",
+        "name": "生长速率"
+      },
+      "chlorophyll": {
+        "range": [
+          30,
+          60
+        ],
+        "unit": "SPAD",
+        "name": "叶绿素含量"
+      }
+    }
+  },
+  {
+    "device_id": "000000001042",
+    "device_name": "📊 植物生长记录仪-03",
+    "device_type": "植物生长记录仪",
+    "icon": "📊",
+    "location": {
+      "lat": 39.86672059664049,
+      "lng": 116.37036974735305
+    },
+    "status": "在线",
+    "install_date": "2025-03-23",
+    "last_update": "2025-08-15T10:01:06.526033",
+    "parameters": {
+      "plant_height": {
+        "range": [
+          15,
+          120
+        ],
+        "unit": "cm",
+        "name": "植株高度"
+      },
+      "leaf_area": {
+        "range": [
+          50,
+          200
+        ],
+        "unit": "cm²",
+        "name": "叶面积"
+      },
+      "growth_rate": {
+        "range": [
+          0.5,
+          3.0
+        ],
+        "unit": "cm/day",
+        "name": "生长速率"
+      },
+      "chlorophyll": {
+        "range": [
+          30,
+          60
+        ],
+        "unit": "SPAD",
+        "name": "叶绿素含量"
+      }
+    }
+  }
+]
