@@ -30,40 +30,62 @@ st.set_page_config(
 class DataLoader:
     def __init__(self, data_dir="data"):
         self.data_dir = data_dir
-        # 地理位置配置 (国科大深圳先进技术研究院)
+        # 地理位置配置 (国科大深圳先进技术研究院) - 优先初始化
         self.base_location = {"lat": 22.59163, "lng": 113.972654}  # 深圳大学城
-        self._load_all_data()
+        try:
+            self._load_all_data()
+        except Exception as e:
+            print(f"数据加载失败，使用备用数据: {e}")
+            self._create_fallback_data()
     
     def _load_all_data(self):
         """加载所有数据"""
+        # 加载设备列表
         try:
-            # 加载设备列表
             with open(f"{self.data_dir}/devices.json", "r", encoding="utf-8") as f:
                 self.devices = json.load(f)
-            
-            # 加载当前数据
+        except FileNotFoundError:
+            self.devices = []
+        
+        # 加载当前数据
+        try:
             with open(f"{self.data_dir}/current_data.json", "r", encoding="utf-8") as f:
                 self.current_data = json.load(f)
-            
-            # 加载历史数据
+        except FileNotFoundError:
+            self.current_data = {}
+        
+        # 加载历史数据
+        try:
             self.historical_data = pd.read_csv(f"{self.data_dir}/historical_data.csv")
-            
-            # 加载SIM卡数据
+        except FileNotFoundError:
+            self.historical_data = pd.DataFrame()
+        
+        # 加载SIM卡数据
+        try:
             with open(f"{self.data_dir}/sim_cards.json", "r", encoding="utf-8") as f:
                 self.sim_cards = json.load(f)
-            
-            # 加载统计数据
+        except FileNotFoundError:
+            self.sim_cards = []
+        
+        # 加载统计数据
+        try:
             with open(f"{self.data_dir}/stats.json", "r", encoding="utf-8") as f:
                 self.stats = json.load(f)
-                
         except FileNotFoundError:
-            # 当数据文件不存在时，创建基础数据
+            self.stats = {"total_devices": 0, "online_devices": 0, "device_types": 0, "sim_cards": 0}
+        
+        # 如果没有设备数据，创建备用数据
+        if not self.devices:
             self._create_fallback_data()
     
     def _create_fallback_data(self):
         """创建基础数据作为后备方案"""
         import random
         from datetime import datetime, timedelta
+        
+        # 确保base_location存在
+        if not hasattr(self, 'base_location'):
+            self.base_location = {"lat": 22.59163, "lng": 113.972654}
         
         # 13种设备类型
         device_types = {
