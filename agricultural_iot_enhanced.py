@@ -57,8 +57,131 @@ class DataLoader:
                 self.stats = json.load(f)
                 
         except FileNotFoundError:
-            st.error("数据文件未找到！请先运行 data_generator.py 生成数据")
-            st.stop()
+            # 当数据文件不存在时，创建基础数据
+            self._create_fallback_data()
+    
+    def _create_fallback_data(self):
+        """创建基础数据作为后备方案"""
+        import random
+        from datetime import datetime, timedelta
+        
+        # 13种设备类型
+        device_types = {
+            "气象站": {"icon": "🌤️", "count": 3},
+            "土壤墒情": {"icon": "🌱", "count": 5},
+            "水质监测": {"icon": "💧", "count": 1},
+            "视频监控": {"icon": "📹", "count": 4},
+            "配电柜": {"icon": "⚡", "count": 2},
+            "虫情监测": {"icon": "🐛", "count": 3},
+            "孢子仪": {"icon": "🦠", "count": 2},
+            "环境监测": {"icon": "🌡️", "count": 4},
+            "智能灌溉": {"icon": "💦", "count": 6},
+            "杀虫灯": {"icon": "💡", "count": 4},
+            "一体化闸门": {"icon": "🚪", "count": 2},
+            "积水传感器": {"icon": "🌊", "count": 3},
+            "植物生长记录仪": {"icon": "📊", "count": 3}
+        }
+        
+        # 生成设备列表
+        self.devices = []
+        device_id = 1001
+        
+        for device_type, config in device_types.items():
+            for i in range(config["count"]):
+                if device_type == "水质监测":
+                    dev_id = "865989071557605"
+                else:
+                    dev_id = f"{device_id:012d}"
+                
+                device = {
+                    "device_id": dev_id,
+                    "device_name": f"{config['icon']} {device_type}-{i+1:02d}",
+                    "device_type": device_type,
+                    "icon": config["icon"],
+                    "location": {
+                        "lat": self.base_location["lat"] + random.uniform(-0.05, 0.05),
+                        "lng": self.base_location["lng"] + random.uniform(-0.05, 0.05)
+                    },
+                    "status": random.choice(["在线", "在线", "在线", "离线"]),
+                    "install_date": "2024-01-15",
+                    "last_update": datetime.now().isoformat(),
+                    "parameters": {
+                        "ph": {"range": [6.8, 7.2], "unit": "pH", "name": "pH值"},
+                        "turbidity": {"range": [15, 25], "unit": "NTU", "name": "浊度"},
+                        "dissolved_oxygen": {"range": [6.5, 8.5], "unit": "mg/L", "name": "溶解氧"},
+                        "water_temp": {"range": [18, 25], "unit": "°C", "name": "水温"},
+                        "conductivity": {"range": [180, 220], "unit": "μS/cm", "name": "电导率"}
+                    }
+                }
+                self.devices.append(device)
+                device_id += 1
+        
+        # 生成当前数据
+        self.current_data = {}
+        for device in self.devices:
+            if device["status"] == "在线":
+                data = {"timestamp": datetime.now().isoformat()}
+                if device["device_type"] == "水质监测":
+                    data.update({
+                        "ph": round(random.uniform(6.8, 7.2), 2),
+                        "turbidity": round(random.uniform(15, 25), 1),
+                        "dissolved_oxygen": round(random.uniform(6.5, 8.5), 2),
+                        "water_temp": round(random.uniform(18, 25), 1),
+                        "conductivity": round(random.uniform(180, 220), 0)
+                    })
+                self.current_data[device["device_id"]] = data
+        
+        # 生成历史数据
+        historical_records = []
+        for i in range(24):  # 24小时数据
+            timestamp = datetime.now() - timedelta(hours=i)
+            for device in self.devices[:5]:  # 前5台设备
+                if device["device_type"] == "水质监测":
+                    record = {
+                        "device_id": device["device_id"],
+                        "device_type": device["device_type"],
+                        "timestamp": timestamp.isoformat(),
+                        "ph": round(random.uniform(6.8, 7.2), 2),
+                        "turbidity": round(random.uniform(15, 25), 1),
+                        "dissolved_oxygen": round(random.uniform(6.5, 8.5), 2),
+                        "water_temp": round(random.uniform(18, 25), 1),
+                        "conductivity": round(random.uniform(180, 220), 0)
+                    }
+                    historical_records.append(record)
+        
+        self.historical_data = pd.DataFrame(historical_records)
+        
+        # 生成SIM卡数据
+        operators = ["中国移动", "中国联通", "中国电信"]
+        self.sim_cards = []
+        
+        for i in range(25):
+            total_data = random.randint(500, 2000)
+            used_data = random.randint(50, int(total_data * 0.9))
+            
+            card = {
+                "card_number": f"898600{random.randint(100000000, 999999999):09d}",
+                "operator": random.choice(operators),
+                "total_data": total_data,
+                "used_data": used_data,
+                "remaining_data": total_data - used_data,
+                "usage_percent": round((used_data / total_data) * 100, 1),
+                "expire_date": (datetime.now() + timedelta(days=random.randint(30, 365))).strftime("%Y-%m-%d"),
+                "status": random.choice(["正常", "正常", "正常", "即将到期", "欠费"]),
+                "monthly_fee": random.choice([15, 20, 30, 50]),
+                "device_binding": random.choice([None, f"设备{random.randint(1001, 1050):04d}"])
+            }
+            self.sim_cards.append(card)
+        
+        # 生成统计数据
+        self.stats = {
+            "total_devices": len(self.devices),
+            "online_devices": len([d for d in self.devices if d["status"] == "在线"]),
+            "device_types": len(device_types),
+            "data_points": len(historical_records),
+            "sim_cards": len(self.sim_cards),
+            "last_update": datetime.now().isoformat()
+        }
     
     def get_devices_by_type(self, device_type=None):
         """按类型获取设备"""
