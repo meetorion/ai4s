@@ -146,9 +146,9 @@ class AgricultureDataGenerator:
             }
         }
         
-        # 地理位置配置 (智慧农场园区)
-        self.base_location = {"lat": 39.9042, "lng": 116.4074}  # 北京附近
-        self.location_spread = 0.05  # 位置散布范围
+        # 地理位置配置 (国科大深圳先进技术研究院)
+        self.base_location = {"lat": 22.59163, "lng": 113.972654}  # 深圳大学城
+        self.location_spread = 0.01  # 位置散布范围 (约1km半径，适合研究院规模)
         
     def generate_device_list(self):
         """生成所有设备列表"""

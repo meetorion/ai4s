@@ -30,8 +30,8 @@ st.set_page_config(
 class DataLoader:
     def __init__(self, data_dir="data"):
         self.data_dir = data_dir
-        # 地理位置配置 (智慧农场园区)
-        self.base_location = {"lat": 39.9042, "lng": 116.4074}  # 北京附近
+        # 地理位置配置 (国科大深圳先进技术研究院)
+        self.base_location = {"lat": 22.59163, "lng": 113.972654}  # 深圳大学城
         self._load_all_data()
     
     def _load_all_data(self):
@@ -99,8 +99,8 @@ class DataLoader:
                     "device_type": device_type,
                     "icon": config["icon"],
                     "location": {
-                        "lat": self.base_location["lat"] + random.uniform(-0.05, 0.05),
-                        "lng": self.base_location["lng"] + random.uniform(-0.05, 0.05)
+                        "lat": self.base_location["lat"] + random.uniform(-0.01, 0.01),
+                        "lng": self.base_location["lng"] + random.uniform(-0.01, 0.01)
                     },
                     "status": random.choice(["在线", "在线", "在线", "离线"]),
                     "install_date": "2024-01-15",
@@ -860,9 +860,18 @@ def render_digital_park():
     
     m = folium.Map(
         location=[center_lat, center_lng],
-        zoom_start=13,
+        zoom_start=16,  # 更高放大级别显示详细信息
         tiles='OpenStreetMap'
     )
+    
+    # 添加卫星图层
+    folium.TileLayer(
+        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        attr='Esri',
+        name='卫星地图',
+        overlay=False,
+        control=True
+    ).add_to(m)
     
     # 添加设备标记
     device_colors = {
@@ -913,14 +922,31 @@ def render_digital_park():
             icon=folium.Icon(color=color, icon='info-sign')
         ).add_to(m)
     
-    # 添加园区边界
+    # 添加研究院中心标记
+    folium.Marker(
+        [center_lat, center_lng],
+        popup=folium.Popup("""
+        <div style="width:200px;">
+        <h4>🏛️ 国科大深圳先进技术研究院</h4>
+        <p><b>地址:</b> 深圳市南山区西丽深圳大学城学苑大道1068号</p>
+        <p><b>农业IoT示范园区</b></p>
+        <p><b>设备总数:</b> 42台</p>
+        </div>
+        """, max_width=250),
+        tooltip="国科大深圳先进技术研究院",
+        icon=folium.Icon(color='red', icon='university', prefix='fa')
+    ).add_to(m)
+    
+    # 添加研究院边界 (约1km半径)
     folium.Circle(
         location=[center_lat, center_lng],
-        radius=2000,  # 2km半径
-        popup="智慧农场园区",
-        color='green',
+        radius=1000,  # 1km半径，适合研究院规模
+        popup="农业IoT示范园区",
+        color='darkgreen',
         fillColor='lightgreen',
-        fillOpacity=0.2
+        fillOpacity=0.15,
+        weight=2,
+        dashArray='5, 5'
     ).add_to(m)
     
     # 添加图例
@@ -940,6 +966,9 @@ def render_digital_park():
     
     legend_html += '</div>'
     m.get_root().html.add_child(folium.Element(legend_html))
+    
+    # 添加图层控制器
+    folium.LayerControl().add_to(m)
     
     # 显示地图
     st.markdown('<div class="map-container">', unsafe_allow_html=True)
@@ -967,11 +996,14 @@ def render_digital_park():
     
     with col2:
         st.markdown("### 🎯 园区信息")
-        st.write("**园区名称**: 智慧农业示范园")
-        st.write("**园区面积**: 约12.6平方公里")
+        st.write("**园区名称**: 国科大深圳先进技术研究院")
+        st.write("**园区地址**: 深圳市南山区西丽深圳大学城学苑大道1068号")
+        st.write("**示范区域**: 农业IoT技术验证园区")
+        st.write("**覆盖范围**: 约3.14平方公里")
         st.write(f"**设备总数**: {len(data_loader.devices)}台")
         st.write(f"**在线设备**: {len([d for d in data_loader.devices if d['status'] == '在线'])}台")
-        st.write("**管理单位**: 农业物联网技术中心")
+        st.write("**管理单位**: 中科院深圳先进技术研究院")
+        st.write("**坐标**: 22.59163°N, 113.972654°E")
 
 def render_sim_card_management():
     """渲染流量卡查询页面"""

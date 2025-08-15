@@ -1,234 +1,179 @@
 {
   "000000001001": {
-    "timestamp": "2025-08-15T10:16:06.529055",
-    "temperature": 22.01,
-    "humidity": 70.68,
-    "wind_speed": 6.22,
-    "pressure": 1011.55,
-    "rainfall": 3.3
+    "timestamp": "2025-08-15T11:01:54.280810",
+    "temperature": 34.97,
+    "humidity": 58.36,
+    "wind_speed": 5.1,
+    "pressure": 1007.01,
+    "rainfall": 12.91
   },
   "000000001002": {
-    "timestamp": "2025-08-15T10:16:06.529079",
-    "temperature": 28.54,
-    "humidity": 70.95,
-    "wind_speed": 7.76,
-    "pressure": 1015.21,
-    "rainfall": 2.27
+    "timestamp": "2025-08-15T11:01:54.280839",
+    "temperature": 31.68,
+    "humidity": 72.64,
+    "wind_speed": 5.57,
+    "pressure": 1009.66,
+    "rainfall": 1.17
   },
   "000000001003": {
-    "timestamp": "2025-08-15T10:16:06.529089",
-    "temperature": 21.64,
-    "humidity": 82.46,
-    "wind_speed": 2.73,
-    "pressure": 1011.75,
-    "rainfall": 6.65
+    "timestamp": "2025-08-15T11:01:54.280850",
+    "temperature": 18.58,
+    "humidity": 80.88,
+    "wind_speed": 0.58,
+    "pressure": 1017.46,
+    "rainfall": 3.98
   },
   "000000001004": {
-    "timestamp": "2025-08-15T10:16:06.529098",
-    "soil_temp": 22.34,
-    "soil_humidity": 29.56,
-    "soil_ph": 6.7,
-    "ec": 2.06,
-    "n_content": 91.34
-  },
-  "000000001005": {
-    "timestamp": "2025-08-15T10:16:06.529107",
-    "soil_temp": 20.45,
-    "soil_humidity": 29.42,
-    "soil_ph": 6.03,
-    "ec": 0.97,
-    "n_content": 106.76
+    "timestamp": "2025-08-15T11:01:54.280860",
+    "soil_temp": 19.41,
+    "soil_humidity": 55.67,
+    "soil_ph": 6.72,
+    "ec": 1.57,
+    "n_content": 128.3
   },
   "000000001006": {
-    "timestamp": "2025-08-15T10:16:06.529117",
-    "soil_temp": 16.69,
-    "soil_humidity": 66.28,
-    "soil_ph": 7.88,
-    "ec": 1.67,
-    "n_content": 127.94
+    "timestamp": "2025-08-15T11:01:54.280871",
+    "soil_temp": 26.59,
+    "soil_humidity": 54.52,
+    "soil_ph": 6.23,
+    "ec": 2.22,
+    "n_content": 116.81
   },
-  "000000001008": {
-    "timestamp": "2025-08-15T10:16:06.529133",
-    "soil_temp": 16.66,
-    "soil_humidity": 39.23,
-    "soil_ph": 6.6,
-    "ec": 1.45,
-    "n_content": 130.96
-  },
-  "865989071557605": {
-    "timestamp": "2025-08-15T10:16:06.529150",
-    "ph": 6.97,
-    "turbidity": 19.07,
-    "dissolved_oxygen": 7.32,
-    "water_temp": 21.0,
-    "conductivity": 199.82
+  "000000001010": {
+    "timestamp": "2025-08-15T11:01:54.280881",
+    "online_status": 0.47,
+    "resolution": "1080P",
+    "storage_usage": 22.88
   },
   "000000001011": {
-    "timestamp": "2025-08-15T10:16:06.529172",
-    "online_status": 0.96,
+    "timestamp": "2025-08-15T11:01:54.280891",
+    "online_status": 0.19,
     "resolution": "720P",
-    "storage_usage": 51.8
-  },
-  "000000001012": {
-    "timestamp": "2025-08-15T10:16:06.529187",
-    "online_status": 0.23,
-    "resolution": "1080P",
-    "storage_usage": 76.94
+    "storage_usage": 59.84
   },
   "000000001013": {
-    "timestamp": "2025-08-15T10:16:06.529200",
-    "online_status": 0.81,
+    "timestamp": "2025-08-15T11:01:54.280898",
+    "online_status": 0.63,
     "resolution": "1080P",
-    "storage_usage": 43.91
+    "storage_usage": 35.07
+  },
+  "000000001014": {
+    "timestamp": "2025-08-15T11:01:54.280905",
+    "voltage": 227.71,
+    "current": 13.59,
+    "power": 3.3,
+    "frequency": 50.15
   },
   "000000001015": {
-    "timestamp": "2025-08-15T10:16:06.529213",
-    "voltage": 239.72,
-    "current": 22.99,
-    "power": 2.63,
-    "frequency": 49.97
-  },
-  "000000001016": {
-    "timestamp": "2025-08-15T10:16:06.529229",
-    "pest_count": 17.99,
-    "trap_temp": 29.49,
-    "light_intensity": 65.47
-  },
-  "000000001017": {
-    "timestamp": "2025-08-15T10:16:06.529242",
-    "pest_count": 0.73,
-    "trap_temp": 30.86,
-    "light_intensity": 62.2
-  },
-  "000000001018": {
-    "timestamp": "2025-08-15T10:16:06.529252",
-    "pest_count": 12.22,
-    "trap_temp": 24.61,
-    "light_intensity": 10.82
+    "timestamp": "2025-08-15T11:01:54.280913",
+    "voltage": 229.3,
+    "current": 17.78,
+    "power": 5.52,
+    "frequency": 50.17
   },
   "000000001019": {
-    "timestamp": "2025-08-15T10:16:06.529258",
-    "spore_count": 1529.35,
-    "analysis_temp": 28.97,
-    "sample_volume": 83.34
+    "timestamp": "2025-08-15T11:01:54.280921",
+    "spore_count": 691.64,
+    "analysis_temp": 29.67,
+    "sample_volume": 59.28
   },
   "000000001020": {
-    "timestamp": "2025-08-15T10:16:06.529265",
-    "spore_count": 1672.28,
-    "analysis_temp": 29.13,
-    "sample_volume": 16.22
+    "timestamp": "2025-08-15T11:01:54.280930",
+    "spore_count": 1350.7,
+    "analysis_temp": 25.09,
+    "sample_volume": 14.45
   },
   "000000001021": {
-    "timestamp": "2025-08-15T10:16:06.529271",
-    "ambient_temp": 19.59,
-    "ambient_humidity": 79.41,
-    "co2": 751.8,
-    "light_intensity": 67843.68
+    "timestamp": "2025-08-15T11:01:54.280937",
+    "ambient_temp": 28.69,
+    "ambient_humidity": 62.51,
+    "co2": 435.71,
+    "light_intensity": 71769.62
   },
-  "000000001024": {
-    "timestamp": "2025-08-15T10:16:06.529279",
-    "ambient_temp": 30.22,
-    "ambient_humidity": 72.46,
-    "co2": 608.02,
-    "light_intensity": 69370.9
+  "000000001023": {
+    "timestamp": "2025-08-15T11:01:54.280946",
+    "ambient_temp": 25.57,
+    "ambient_humidity": 63.5,
+    "co2": 688.25,
+    "light_intensity": 60806.29
   },
   "000000001025": {
-    "timestamp": "2025-08-15T10:16:06.529286",
-    "flow_rate": 6.8,
-    "pressure": 0.28,
+    "timestamp": "2025-08-15T11:01:54.280954",
+    "flow_rate": 12.71,
+    "pressure": 0.72,
     "valve_status": "开启",
-    "water_level": 63.79
+    "water_level": 74.51
   },
   "000000001026": {
-    "timestamp": "2025-08-15T10:16:06.529294",
-    "flow_rate": 10.22,
-    "pressure": 0.42,
+    "timestamp": "2025-08-15T11:01:54.280963",
+    "flow_rate": 9.93,
+    "pressure": 0.59,
     "valve_status": "关闭",
-    "water_level": 94.67
-  },
-  "000000001027": {
-    "timestamp": "2025-08-15T10:16:06.529302",
-    "flow_rate": 14.07,
-    "pressure": 0.31,
-    "valve_status": "开启",
-    "water_level": 35.53
-  },
-  "000000001028": {
-    "timestamp": "2025-08-15T10:16:06.529309",
-    "flow_rate": 14.61,
-    "pressure": 0.58,
-    "valve_status": "开启",
-    "water_level": 92.92
+    "water_level": 60.26
   },
   "000000001029": {
-    "timestamp": "2025-08-15T10:16:06.529317",
-    "flow_rate": 11.79,
-    "pressure": 0.71,
-    "valve_status": "关闭",
-    "water_level": 83.22
-  },
-  "000000001030": {
-    "timestamp": "2025-08-15T10:16:06.529324",
-    "flow_rate": 12.0,
-    "pressure": 0.47,
+    "timestamp": "2025-08-15T11:01:54.280972",
+    "flow_rate": 2.5,
+    "pressure": 0.35,
     "valve_status": "开启",
-    "water_level": 41.01
+    "water_level": 87.43
   },
   "000000001031": {
-    "timestamp": "2025-08-15T10:16:06.529332",
-    "power_consumption": 16.47,
-    "working_hours": 11.94,
-    "killed_insects": 277.01
+    "timestamp": "2025-08-15T11:01:54.280981",
+    "power_consumption": 22.9,
+    "working_hours": 10.26,
+    "killed_insects": 100.77
   },
   "000000001032": {
-    "timestamp": "2025-08-15T10:16:06.529339",
-    "power_consumption": 29.78,
-    "working_hours": 11.2,
-    "killed_insects": 82.54
+    "timestamp": "2025-08-15T11:01:54.280988",
+    "power_consumption": 22.14,
+    "working_hours": 8.11,
+    "killed_insects": 55.17
   },
   "000000001033": {
-    "timestamp": "2025-08-15T10:16:06.529345",
-    "power_consumption": 21.8,
-    "working_hours": 8.98,
-    "killed_insects": 56.69
+    "timestamp": "2025-08-15T11:01:54.280995",
+    "power_consumption": 21.98,
+    "working_hours": 6.63,
+    "killed_insects": 291.89
   },
   "000000001034": {
-    "timestamp": "2025-08-15T10:16:06.529351",
-    "power_consumption": 26.71,
-    "working_hours": 11.85,
-    "killed_insects": 208.13
+    "timestamp": "2025-08-15T11:01:54.281002",
+    "power_consumption": 17.11,
+    "working_hours": 6.63,
+    "killed_insects": 140.63
   },
-  "000000001037": {
-    "timestamp": "2025-08-15T10:16:06.529358",
-    "water_depth": 39.76,
-    "alert_level": "警告",
-    "drain_status": "畅通"
+  "000000001035": {
+    "timestamp": "2025-08-15T11:01:54.281008",
+    "gate_opening": 44.71,
+    "water_flow": 243.18,
+    "upstream_level": 3.21,
+    "downstream_level": 3.3
   },
-  "000000001038": {
-    "timestamp": "2025-08-15T10:16:06.529364",
-    "water_depth": 62.64,
-    "alert_level": "警告",
+  "000000001039": {
+    "timestamp": "2025-08-15T11:01:54.281018",
+    "water_depth": 57.24,
+    "alert_level": "正常",
     "drain_status": "堵塞"
   },
   "000000001040": {
-    "timestamp": "2025-08-15T10:16:06.529369",
-    "plant_height": 100.08,
-    "leaf_area": 155.26,
-    "growth_rate": 0.95,
-    "chlorophyll": 58.66
+    "timestamp": "2025-08-15T11:01:54.281024",
+    "plant_height": 56.75,
+    "leaf_area": 121.0,
+    "growth_rate": 1.29,
+    "chlorophyll": 50.39
   },
   "000000001041": {
-    "timestamp": "2025-08-15T10:16:06.529377",
-    "plant_height": 76.58,
-    "leaf_area": 86.79,
-    "growth_rate": 1.36,
-    "chlorophyll": 59.34
+    "timestamp": "2025-08-15T11:01:54.281033",
+    "plant_height": 52.95,
+    "leaf_area": 163.13,
+    "growth_rate": 2.05,
+    "chlorophyll": 55.25
   },
   "000000001042": {
-    "timestamp": "2025-08-15T10:16:06.529384",
-    "plant_height": 111.58,
-    "leaf_area": 153.47,
-    "growth_rate": 0.56,
-    "chlorophyll": 33.49
+    "timestamp": "2025-08-15T11:01:54.281041",
+    "plant_height": 57.29,
+    "leaf_area": 85.07,
+    "growth_rate": 2.36,
+    "chlorophyll": 47.34
   }
 }
