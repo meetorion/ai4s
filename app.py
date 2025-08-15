@@ -11,6 +11,8 @@ import os
 from datetime import datetime, timedelta
 import random
 import numpy as np
+import folium
+from streamlit_folium import st_folium
 
 # 页面配置
 st.set_page_config(
@@ -23,6 +25,8 @@ st.set_page_config(
 # 简化数据加载器
 class SimpleDataLoader:
     def __init__(self):
+        # 地理位置配置 (国科大深圳先进技术研究院)
+        self.base_location = {"lat": 22.59163, "lng": 113.972654}
         self.load_or_generate_data()
     
     def load_or_generate_data(self):
@@ -47,6 +51,7 @@ class SimpleDataLoader:
         # 生成设备列表
         self.devices = []
         device_id = 1001
+        np.random.seed(42)  # 固定随机种子保持一致性
         
         for device_type, config in self.device_types.items():
             for i in range(config["count"]):
@@ -55,6 +60,10 @@ class SimpleDataLoader:
                 else:
                     dev_id = f"{device_id:012d}"
                 
+                # 在研究院周围1km范围内生成位置
+                lat_offset = np.random.uniform(-0.01, 0.01)
+                lng_offset = np.random.uniform(-0.01, 0.01)
+                
                 device = {
                     "device_id": dev_id,
                     "device_name": f"{config['icon']} {device_type}-{i+1:02d}",
@@ -62,7 +71,11 @@ class SimpleDataLoader:
                     "icon": config["icon"],
                     "status": random.choice(["在线", "在线", "在线", "离线"]),
                     "install_date": "2024-01-15",
-                    "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "location": {
+                        "lat": self.base_location["lat"] + lat_offset,
+                        "lng": self.base_location["lng"] + lng_offset
+                    }
                 }
                 self.devices.append(device)
                 device_id += 1
@@ -358,167 +371,208 @@ def render_realtime_data():
             st.markdown("---")
 
 def render_digital_park():
-    """数字园区页面 - Streamlit Cloud优化版"""
+    """数字园区页面 - 使用真正的地图"""
     st.markdown('<h2>🗺️ 数字园区</h2>', unsafe_allow_html=True)
     
-    # 简化版地图展示 - 不使用folium，改用文本和图表
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        st.markdown("### 🏛️ 国科大深圳先进技术研究院")
-        st.markdown("**地址**: 深圳市南山区西丽深圳大学城学苑大道1068号")
-        st.markdown("**坐标**: 22.59163°N, 113.972654°E")
-        
-        # 创建设备分布图 - 使用散点图替代地图
-        st.markdown("### 📍 设备分布图")
-        
-        # 生成设备位置数据
-        np.random.seed(42)  # 固定随机种子
-        base_lat, base_lng = 22.59163, 113.972654
-        
-        device_locations = []
-        for device in data_loader.devices:
-            # 在研究院周围1km范围内随机分布
-            lat_offset = np.random.uniform(-0.005, 0.005)
-            lng_offset = np.random.uniform(-0.005, 0.005)
-            
-            device_locations.append({
-                "设备名称": device["device_name"],
-                "设备类型": device["device_type"],
-                "纬度": base_lat + lat_offset,
-                "经度": base_lng + lng_offset,
-                "状态": device["status"],
-                "图标": device["icon"]
-            })
-        
-        # 创建DataFrame
-        df_locations = pd.DataFrame(device_locations)
-        
-        # 使用Streamlit内置的散点图
-        try:
-            chart_data = df_locations[["纬度", "经度"]].copy()
-            chart_data["size"] = 20  # 点的大小
-            
-            st.scatter_chart(
-                chart_data,
-                x="经度",
-                y="纬度",
-                size="size",
-                height=400
-            )
-            
-            st.success("✅ 设备位置分布图已显示")
-            
-        except Exception as e:
-            st.warning(f"地图组件加载中，显示简化版本")
-            
-            # 备选：文字版设备分布
-            st.markdown("#### 🗺️ 设备区域分布")
-            
-            regions = {
-                "北区": {"devices": [], "emoji": "🌾"},
-                "南区": {"devices": [], "emoji": "🌿"}, 
-                "东区": {"devices": [], "emoji": "🌱"},
-                "西区": {"devices": [], "emoji": "🍃"},
-                "中心区": {"devices": [], "emoji": "🏛️"}
-            }
-            
-            # 随机分配设备到区域
-            for i, device in enumerate(data_loader.devices):
-                region_name = list(regions.keys())[i % len(regions)]
-                regions[region_name]["devices"].append(device)
-            
-            # 显示各区域设备
-            for region, info in regions.items():
-                if info["devices"]:
-                    st.markdown(f"**{info['emoji']} {region}** ({len(info['devices'])}台设备)")
-                    device_types = {}
-                    for device in info["devices"]:
-                        device_type = device["device_type"]
-                        device_types[device_type] = device_types.get(device_type, 0) + 1
-                    
-                    for device_type, count in device_types.items():
-                        icon = data_loader.device_types[device_type]["icon"]
-                        st.write(f"   {icon} {device_type}: {count}台")
+    # 地图选项
+    col1, col2 = st.columns([3, 1])
     
     with col2:
-        st.markdown("### 📊 园区统计")
+        map_style = st.selectbox(
+            "地图样式",
+            ["标准地图", "简化地图"],
+            index=0
+        )
         
-        # 设备状态统计
-        online_count = len([d for d in data_loader.devices if d["status"] == "在线"])
-        offline_count = len([d for d in data_loader.devices if d["status"] == "离线"])
-        
-        st.metric("设备总数", len(data_loader.devices))
-        st.metric("在线设备", online_count, delta=f"{online_count-offline_count}")
-        st.metric("离线设备", offline_count)
-        
-        # 设备类型分布
-        st.markdown("#### 🏭 设备类型分布")
-        device_type_counts = {}
-        for device in data_loader.devices:
-            device_type = device["device_type"]
-            device_type_counts[device_type] = device_type_counts.get(device_type, 0) + 1
-        
-        # 创建饼图数据
-        chart_data = pd.DataFrame([
-            {"类型": k, "数量": v, "图标": data_loader.device_types[k]["icon"]} 
-            for k, v in device_type_counts.items()
-        ])
-        
-        # 显示设备类型列表
-        for _, row in chart_data.iterrows():
-            percentage = round((row["数量"] / len(data_loader.devices)) * 100, 1)
-            st.write(f"{row['图标']} **{row['类型']}**: {row['数量']}台 ({percentage}%)")
-        
-        # 园区范围信息
-        st.markdown("#### 📏 园区信息")
-        st.write("**园区面积**: ~3.14 km²")
-        st.write("**覆盖范围**: 1km 半径")
-        st.write("**设备密度**: 13.4台/km²")
-        
-    # 设备详细列表
-    st.markdown("---")
-    st.markdown("### 📋 设备详细信息")
+        show_devices = st.checkbox("显示设备标记", value=True)
+        show_legend = st.checkbox("显示图例", value=True)
     
-    # 筛选选项
+    # 创建地图
+    center_lat = data_loader.base_location["lat"]
+    center_lng = data_loader.base_location["lng"]
+    
+    try:
+        if map_style == "简化地图":
+            # 简化版地图 - 更稳定
+            m = folium.Map(
+                location=[center_lat, center_lng],
+                zoom_start=15,
+                tiles='OpenStreetMap'
+            )
+            
+            # 只添加研究院标记
+            folium.Marker(
+                [center_lat, center_lng],
+                popup="🏛️ 国科大深圳先进技术研究院<br>农业IoT示范园区",
+                tooltip="国科大深圳先进技术研究院",
+                icon=folium.Icon(color='red', icon='star')
+            ).add_to(m)
+            
+            # 添加园区边界
+            folium.Circle(
+                location=[center_lat, center_lng],
+                radius=1000,
+                popup="农业IoT示范园区",
+                color='green',
+                fillColor='lightgreen',
+                fillOpacity=0.2
+            ).add_to(m)
+            
+        else:
+            # 完整版地图
+            m = folium.Map(
+                location=[center_lat, center_lng],
+                zoom_start=16,  # 更高放大级别显示详细信息
+                tiles='OpenStreetMap'
+            )
+            
+            # 设备颜色映射 - 使用Folium支持的颜色
+            device_colors = {
+                "气象站": "blue",
+                "土壤墒情": "green", 
+                "水质监测": "lightblue",
+                "视频监控": "red",
+                "配电柜": "orange",
+                "虫情监测": "purple",
+                "孢子仪": "pink",
+                "环境监测": "gray",
+                "智能灌溉": "lightgreen",
+                "杀虫灯": "beige",
+                "一体化闸门": "darkblue",
+                "积水传感器": "cadetblue",
+                "植物生长记录仪": "darkgreen"
+            }
+            
+            # 添加设备标记
+            if show_devices:
+                for device in data_loader.devices:
+                    lat = device["location"]["lat"]
+                    lng = device["location"]["lng"]
+                    color = device_colors.get(device["device_type"], "gray")
+                    
+                    # 构建弹出信息
+                    popup_content = f"""
+                    <b>{device['icon']} {device['device_name']}</b><br>
+                    <b>设备ID:</b> {device['device_id']}<br>
+                    <b>状态:</b> {'🟢' if device['status'] == '在线' else '🔴'} {device['status']}<br>
+                    <b>安装日期:</b> {device['install_date']}<br>
+                    <b>坐标:</b> {lat:.5f}, {lng:.5f}
+                    """
+                    
+                    folium.Marker(
+                        [lat, lng],
+                        popup=folium.Popup(popup_content, max_width=300),
+                        tooltip=f"{device['icon']} {device['device_name']}",
+                        icon=folium.Icon(color=color, icon='info-sign')
+                    ).add_to(m)
+            
+            # 添加研究院中心标记
+            folium.Marker(
+                [center_lat, center_lng],
+                popup=folium.Popup("""
+                <div style="width:250px;">
+                <h4>🏛️ 国科大深圳先进技术研究院</h4>
+                <p><b>地址:</b> 深圳市南山区西丽深圳大学城学苑大道1068号</p>
+                <p><b>农业IoT示范园区</b></p>
+                <p><b>设备总数:</b> 42台</p>
+                <p><b>坐标:</b> 22.59163°N, 113.972654°E</p>
+                </div>
+                """, max_width=300),
+                tooltip="国科大深圳先进技术研究院",
+                icon=folium.Icon(color='red', icon='star')
+            ).add_to(m)
+            
+            # 添加研究院边界 (约1km半径)
+            folium.Circle(
+                location=[center_lat, center_lng],
+                radius=1000,  # 1km半径，适合研究院规模
+                popup="农业IoT示范园区",
+                color='darkgreen',
+                fillColor='lightgreen',
+                fillOpacity=0.15,
+                weight=2,
+                dashArray='5, 5'
+            ).add_to(m)
+            
+            # 添加图例
+            if show_legend:
+                legend_html = '''
+                <div style="position: fixed; 
+                            top: 10px; right: 10px; width: 200px; height: auto; 
+                            background-color: white; border:2px solid grey; z-index:9999; 
+                            font-size:12px; padding: 10px;">
+                <h4>设备类型图例</h4>
+                '''
+                
+                for device_type, color in device_colors.items():
+                    count = len([d for d in data_loader.devices if d["device_type"] == device_type])
+                    icon = data_loader.device_types[device_type]["icon"]
+                    legend_html += f'<p><span style="color:{color};">●</span> {icon} {device_type} ({count})</p>'
+                
+                legend_html += '</div>'
+                m.get_root().html.add_child(folium.Element(legend_html))
+            
+            # 添加图层控制器
+            folium.LayerControl().add_to(m)
+        
+        # 显示地图
+        st.markdown('<div class="map-container">', unsafe_allow_html=True)
+        map_data = st_folium(m, width=700, height=500, returned_objects=["last_object_clicked"])
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # 显示点击信息
+        if map_data['last_object_clicked']:
+            st.info(f"📍 最后点击位置: {map_data['last_object_clicked']}")
+        
+    except Exception as e:
+        st.error(f"地图加载失败: {str(e)}")
+        st.info("请刷新页面重试，或检查网络连接")
+        
+        # 创建简化版地图作为备选
+        simple_map = folium.Map(
+            location=[center_lat, center_lng],
+            zoom_start=14,
+            tiles='OpenStreetMap'
+        )
+        folium.Marker(
+            [center_lat, center_lng],
+            popup="国科大深圳先进技术研究院",
+            tooltip="研究院位置"
+        ).add_to(simple_map)
+        map_data = st_folium(simple_map, width=700, height=500)
+    
+    # 设备统计信息
+    st.markdown("---")
     col1, col2 = st.columns(2)
     
     with col1:
-        device_types = ["全部"] + list(data_loader.device_types.keys())
-        filter_type = st.selectbox("筛选设备类型", device_types, key="park_type_filter")
+        st.markdown("### 📊 设备分布统计")
+        device_stats = {}
+        for device in data_loader.devices:
+            device_type = device["device_type"]
+            device_stats[device_type] = device_stats.get(device_type, 0) + 1
+        
+        for device_type, count in device_stats.items():
+            icon = data_loader.device_types[device_type]["icon"]
+            percentage = round((count / len(data_loader.devices)) * 100, 1)
+            st.write(f"{icon} **{device_type}**: {count}台 ({percentage}%)")
     
     with col2:
-        status_options = ["全部", "在线", "离线"]
-        filter_status = st.selectbox("筛选设备状态", status_options, key="park_status_filter")
-    
-    # 应用筛选
-    filtered_devices = data_loader.devices.copy()
-    
-    if filter_type != "全部":
-        filtered_devices = [d for d in filtered_devices if d["device_type"] == filter_type]
-    
-    if filter_status != "全部":
-        filtered_devices = [d for d in filtered_devices if d["status"] == filter_status]
-    
-    # 创建设备表格
-    if filtered_devices:
-        device_table = []
-        for device in filtered_devices:
-            device_table.append({
-                "设备名称": f"{device['icon']} {device['device_name']}",
-                "设备ID": device["device_id"],
-                "设备类型": device["device_type"],
-                "状态": "🟢 在线" if device["status"] == "在线" else "🔴 离线",
-                "安装日期": device["install_date"],
-                "最后更新": device["last_update"]
-            })
+        st.markdown("### 📈 系统状态")
         
-        df_devices = pd.DataFrame(device_table)
-        st.dataframe(df_devices, use_container_width=True)
+        online_count = len([d for d in data_loader.devices if d["status"] == "在线"])
+        offline_count = len([d for d in data_loader.devices if d["status"] == "离线"])
         
-        st.info(f"📊 共找到 {len(filtered_devices)} 个设备")
-    else:
-        st.warning("没有找到符合条件的设备")
+        st.write(f"**设备总数**: {len(data_loader.devices)}台")
+        st.write(f"**在线设备**: {online_count}台")
+        st.write(f"**离线设备**: {offline_count}台") 
+        st.write(f"**在线率**: {round((online_count/len(data_loader.devices))*100, 1)}%")
+        
+        # 园区信息
+        st.markdown("#### 📏 园区信息")
+        st.write("**园区面积**: ~3.14 km²")
+        st.write("**设备密度**: 13.4台/km²")
+        st.write("**覆盖范围**: 1km 半径")
 
 def render_sim_card_management():
     """SIM卡管理页面"""
