@@ -876,6 +876,41 @@ def render_digital_park():
     """渲染数字园区页面"""
     st.markdown('<h2>🗺️ 数字园区</h2>', unsafe_allow_html=True)
     
+    # 验证和修复 DataLoader 状态
+    global data_loader
+    try:
+        # 检查关键属性是否存在
+        required_attrs = ['base_location', 'devices']
+        missing_attrs = [attr for attr in required_attrs if not hasattr(data_loader, attr)]
+        
+        if missing_attrs:
+            st.error(f"🔧 数据加载器缺少关键属性: {missing_attrs}")
+            st.info("正在重新初始化数据加载器...")
+            
+            # 清除缓存并重新创建
+            st.cache_resource.clear()
+            data_loader = DataLoader()
+            
+            # 再次验证
+            if not hasattr(data_loader, 'base_location'):
+                st.error("❌ 数据加载器重新初始化失败，使用紧急模式")
+                # 创建最小化的紧急数据加载器
+                class EmergencyDataLoader:
+                    def __init__(self):
+                        self.base_location = {"lat": 22.59163, "lng": 113.972654}
+                        self.devices = []
+                        self.stats = {"total_devices": 0, "online_devices": 0}
+                    
+                    def get_real_time_data(self, device_id):
+                        return {}
+                
+                data_loader = EmergencyDataLoader()
+                st.success("✅ 紧急模式已激活")
+        
+    except Exception as init_error:
+        st.error(f"🚨 数据初始化严重错误: {str(init_error)}")
+        st.info("启用最小功能模式...")
+    
     # 地图选项
     col1, col2 = st.columns([3, 1])
     
@@ -886,9 +921,25 @@ def render_digital_park():
             index=0
         )
     
-    # 创建地图
-    center_lat = data_loader.base_location["lat"]
-    center_lng = data_loader.base_location["lng"]
+    # 创建地图 - 添加对象状态验证和紧急回退
+    try:
+        # 验证 data_loader 对象状态
+        if not hasattr(data_loader, 'base_location') or not data_loader.base_location:
+            st.error("⚠️ 数据加载器状态异常，使用默认坐标")
+            # 强制重新创建 data_loader
+            st.cache_resource.clear()
+            # 使用国科大深圳先进技术研究院默认坐标
+            center_lat = 22.59163
+            center_lng = 113.972654
+        else:
+            center_lat = data_loader.base_location["lat"]
+            center_lng = data_loader.base_location["lng"]
+    except Exception as e:
+        st.error(f"🚨 地图初始化错误: {str(e)}")
+        st.info("使用备用坐标继续运行...")
+        # 使用硬编码的安全坐标
+        center_lat = 22.59163  # 国科大深圳先进技术研究院
+        center_lng = 113.972654
     
     if map_style == "简化地图":
         # 简化版地图 - 更稳定
@@ -949,38 +1000,49 @@ def render_digital_park():
             "积水传感器": "cadetblue",
             "植物生长记录仪": "darkgreen"
         }
-    
-        for device in data_loader.devices:
-            lat = device["location"]["lat"]
-            lng = device["location"]["lng"]
-            color = device_colors.get(device["device_type"], "gray")
+        
+        # 安全地添加设备标记 - 防止设备数据缺失
+        try:
+            devices = getattr(data_loader, 'devices', [])
+            if not devices:
+                st.warning("📍 设备数据暂时不可用，仅显示研究院位置")
+                devices = []
             
-            # 获取实时数据
-            current_data = data_loader.get_real_time_data(device["device_id"])
-            popup_content = f"""
-            <b>{device['icon']} {device['device_name']}</b><br>
-            <b>设备ID:</b> {device['device_id']}<br>
-            <b>状态:</b> {'🟢' if device['status'] == '在线' else '🔴'} {device['status']}<br>
-            <b>安装日期:</b> {device['install_date']}<br>
-            """
-            
-            if current_data:
-                popup_content += "<br><b>实时数据:</b><br>"
-                count = 0
-                for param, value in current_data.items():
-                    if param != "timestamp" and count < 3:  # 只显示前3个参数
-                        param_config = device["parameters"].get(param, {})
-                        name = param_config.get("name", param)
-                        unit = param_config.get("unit", "")
-                        popup_content += f"{name}: {value} {unit}<br>"
-                        count += 1
-            
-            folium.Marker(
-                [lat, lng],
-                popup=folium.Popup(popup_content, max_width=300),
-                tooltip=f"{device['icon']} {device['device_name']}",
-                icon=folium.Icon(color=color, icon='info-sign')
-            ).add_to(m)
+            for device in devices:
+                lat = device["location"]["lat"]
+                lng = device["location"]["lng"]
+                color = device_colors.get(device["device_type"], "gray")
+                
+                # 获取实时数据
+                current_data = data_loader.get_real_time_data(device["device_id"])
+                popup_content = f"""
+                <b>{device['icon']} {device['device_name']}</b><br>
+                <b>设备ID:</b> {device['device_id']}<br>
+                <b>状态:</b> {'🟢' if device['status'] == '在线' else '🔴'} {device['status']}<br>
+                <b>安装日期:</b> {device['install_date']}<br>
+                """
+                
+                if current_data:
+                    popup_content += "<br><b>实时数据:</b><br>"
+                    count = 0
+                    for param, value in current_data.items():
+                        if param != "timestamp" and count < 3:  # 只显示前3个参数
+                            param_config = device["parameters"].get(param, {})
+                            name = param_config.get("name", param)
+                            unit = param_config.get("unit", "")
+                            popup_content += f"{name}: {value} {unit}<br>"
+                            count += 1
+                
+                folium.Marker(
+                    [lat, lng],
+                    popup=folium.Popup(popup_content, max_width=300),
+                    tooltip=f"{device['icon']} {device['device_name']}",
+                    icon=folium.Icon(color=color, icon='info-sign')
+                ).add_to(m)
+                
+        except Exception as device_error:
+            st.warning(f"⚠️ 设备标记添加失败: {str(device_error)}")
+            st.info("地图将仅显示研究院位置，设备标记暂时不可用")
         
         # 添加研究院中心标记
         folium.Marker(
@@ -1057,19 +1119,27 @@ def render_digital_park():
     
     with col1:
         st.markdown("### 📊 设备分布统计")
-        device_stats = {}
-        for device in data_loader.devices:
-            device_type = device["device_type"]
-            if device_type not in device_stats:
-                device_stats[device_type] = {"total": 0, "online": 0}
-            device_stats[device_type]["total"] += 1
-            if device["status"] == "在线":
-                device_stats[device_type]["online"] += 1
-        
-        for device_type, stats in device_stats.items():
-            icon = next((d["icon"] for d in data_loader.devices if d["device_type"] == device_type), "📍")
-            online_rate = (stats["online"] / stats["total"] * 100) if stats["total"] > 0 else 0
-            st.write(f"{icon} **{device_type}**: {stats['online']}/{stats['total']} ({online_rate:.1f}%)")
+        try:
+            devices = getattr(data_loader, 'devices', [])
+            if devices:
+                device_stats = {}
+                for device in devices:
+                    device_type = device["device_type"]
+                    if device_type not in device_stats:
+                        device_stats[device_type] = {"total": 0, "online": 0}
+                    device_stats[device_type]["total"] += 1
+                    if device["status"] == "在线":
+                        device_stats[device_type]["online"] += 1
+                
+                for device_type, stats in device_stats.items():
+                    icon = next((d["icon"] for d in devices if d["device_type"] == device_type), "📍")
+                    online_rate = (stats["online"] / stats["total"] * 100) if stats["total"] > 0 else 0
+                    st.write(f"{icon} **{device_type}**: {stats['online']}/{stats['total']} ({online_rate:.1f}%)")
+            else:
+                st.info("📊 设备统计数据暂时不可用")
+        except Exception as stats_error:
+            st.warning(f"⚠️ 统计数据加载失败: {str(stats_error)}")
+            st.info("📊 显示基础信息...")
     
     with col2:
         st.markdown("### 🎯 园区信息")
@@ -1077,8 +1147,18 @@ def render_digital_park():
         st.write("**园区地址**: 深圳市南山区西丽深圳大学城学苑大道1068号")
         st.write("**示范区域**: 农业IoT技术验证园区")
         st.write("**覆盖范围**: 约3.14平方公里")
-        st.write(f"**设备总数**: {len(data_loader.devices)}台")
-        st.write(f"**在线设备**: {len([d for d in data_loader.devices if d['status'] == '在线'])}台")
+        
+        # 安全地显示设备统计
+        try:
+            devices = getattr(data_loader, 'devices', [])
+            total_devices = len(devices)
+            online_devices = len([d for d in devices if d.get('status') == '在线'])
+            st.write(f"**设备总数**: {total_devices}台")
+            st.write(f"**在线设备**: {online_devices}台")
+        except Exception:
+            st.write("**设备总数**: 数据加载中...")
+            st.write("**在线设备**: 数据加载中...")
+        
         st.write("**管理单位**: 中科院深圳先进技术研究院")
         st.write("**坐标**: 22.59163°N, 113.972654°E")
 
